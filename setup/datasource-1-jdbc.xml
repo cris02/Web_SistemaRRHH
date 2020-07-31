@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbc-data-source xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
+  <name>jdbc/SistemaRH</name>
+  <jdbc-driver-params>
+    <url>jdbc:mysql://35.239.6.108:3306/BITLAB?zeroDateTimeBehavior=convertToNull</url>
+    <driver-name>com.mysql.cj.jdbc.Driver</driver-name>
+    <properties>
+      <property>
+        <name>user</name>
+        <value>bitlab</value>
+      </property>
+      <property>
+        <name>password</name>
+        <value>Bit3030$!</value>
+      </property>
+    </properties>
+  </jdbc-driver-params>
+  <jdbc-data-source-params>
+    <jndi-name>jdbc/SistemaRH</jndi-name>
+  </jdbc-data-source-params>
+</jdbc-data-source>
