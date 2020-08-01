@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             //buscar el depto con el id 1
-            DepartamentoControlador controlador = new DepartamentoControlador();
+              DepartamentoControlador controlador = new DepartamentoControlador();
             Departamento departamento = controlador.encontrar(1);
             System.out.println(departamento.getDeptVacanteDisponible());
         } catch (Exception ex) {
