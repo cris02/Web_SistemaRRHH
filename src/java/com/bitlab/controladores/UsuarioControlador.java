@@ -7,7 +7,9 @@ package com.bitlab.controladores;
 
 import com.bitlab.conexion.FabricaConexion;
 import com.bitlab.entidades.Usuario;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,4 +26,28 @@ public class UsuarioControlador extends FabricaControladorAbstracto<Usuario>{
         return FabricaConexion.getInstancia().getManejadorEntidades().createEntityManager();
     }
     
+    //encontrar una entidad por Usuario
+    public Usuario encontrarPorUsuario(String usuario, String pass) throws Exception {
+        EntityManager em = obtenerManejadorEntidades();
+        Usuario us;
+        
+        try {
+            Query query = em.createQuery("SELECT u from Usuario u WHERE u.usuNombre = :usuNombre AND u.usuContrasena = :usuContrasena");
+            query.setParameter("usuNombre", usuario);
+            query.setParameter("usuContrasena", pass);
+            List<Usuario> lista = query.getResultList();
+            if(!lista.isEmpty()){
+                us = lista.get(0);
+                return us;
+            }
+        } catch (Exception e) {
+            //posible error en la busqueda
+            throw new Exception(e);
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return null;
+    }
 }
