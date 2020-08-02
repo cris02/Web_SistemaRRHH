@@ -20,21 +20,23 @@ public abstract class ManejadorAbstracto<T>{
     private List<T> entidadLista;
     private final Class<T> claseEntidad;
     
+    //metodo que retorna la instancia de la entidad
     public ManejadorAbstracto(Class<T> entidad){
         claseEntidad = entidad;
     }
     
-    @PostConstruct
+    @PostConstruct //metodo que se carga cuando se crea la instancia del manejador abstracto
     public void cargarInformacion(){
         entidadLista = obtenerControlador().encontrarEntidades();
     }
     
-    @PreDestroy
+    @PreDestroy // metodo para eliminar las instancia la finalizar el ScopeView
     public void destruir(){
         entidadLista = null;
         entidadSeleccionada = null;
     }
     
+    //metodo para instanciar la entidad seleccionada
     public void nuevaEntidad(){
         try {
             entidadSeleccionada = claseEntidad.getDeclaredConstructor().newInstance();
@@ -43,9 +45,10 @@ public abstract class ManejadorAbstracto<T>{
         }
     }
     
+    //metodo para actualizar la entidad
     public void guardarEntidad(){
         try {
-            System.out.println("Ingresando a guardar " +claseEntidad.getSimpleName());
+            System.out.println("Ingresando a guardar " +claseEntidad.getSimpleName()); 
             obtenerControlador().editar(entidadSeleccionada);
             cargarInformacion();
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
@@ -54,6 +57,7 @@ public abstract class ManejadorAbstracto<T>{
         }
     }
     
+    //metodo para eliminar la entidad
     public void eliminarEntidad(){
         try {
             System.out.println("Ingresando a eliminar " +claseEntidad.getSimpleName());
@@ -65,6 +69,9 @@ public abstract class ManejadorAbstracto<T>{
         }
     }
 
+    /*
+        metodos Getter y Setter
+    */
     public T getEntidadSeleccionada() {
         return entidadSeleccionada;
     }
