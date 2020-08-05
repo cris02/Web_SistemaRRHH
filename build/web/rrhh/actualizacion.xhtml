@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <meta charset="utf-8" />
@@ -102,13 +104,112 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+
+
+
+
+
+
+                                <h1>Lista de Empleados</h1>
+                                <p:growl id="messages" globalOnly="true" showDetail="true" />
+                                <p:messages id="messagesAll" />
+                                <h:form id="formProductos">
+                                    <p:dataTable lazy="true" var="empleado" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true">
+                                        <p:column headerText="Id Empleado" sortBy="#{empleado.empIdPk}">
+                                            <h:outputText value="#{empleado.empIdPk}" />
+                                        </p:column>
+                                        <p:column headerText="Nombre" sortBy="#{empleado.empNombres}" filterBy="#{empleado.empNombres}" filterMatchMode="contains">
+                                            <h:outputText value="#{empleado.empNombres}" />
+                                        </p:column>
+                                        <p:column headerText="Apellidos" sortBy="#{empleado.empApellidos}" filterBy="#{empleado.empApellidos}" filterMatchMode="contains">
+                                            <h:outputText value="#{empleado.empApellidos}" />
+                                        </p:column>
+                                        <p:column headerText="Documento">
+                                            <h:outputText value="#{empleado.empDocumento}" />
+                                        </p:column>
+                                        <p:column headerText="Fecha de Nacimiento" sortBy="#{empleado.empFechaNacimiento}">
+                                            <h:outputText value="#{empleado.empFechaNacimiento}" />
+                                        </p:column>
+                                        <p:column headerText="Correo Electronico">
+                                            <h:outputText value="#{empleado.empCorreo}" />
+                                        </p:column>
+                                        <p:column style="width:32px;text-align: center">
+                                            <p:commandButton update=":formDetailEmp" oncomplete="PF('empleadoDialog').show()" icon="pi pi-search" title="Ver">
+                                                <f:setPropertyActionListener value="#{empleado}" target="#{empleadoManejador.entidadSeleccionada}" />
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                    ​
+                                    <p:commandButton value="Crear" actionListener="#{empleadoManejador.nuevaEntidad()}" process="@this" update=":formDetailEmp" 
+                                                     oncomplete="PF('empleadoDialog').show()" />
+                                </h:form>
+                                ​
+                                <h:form id="formDetailEmp">
+                                    <p:dialog widgetVar="empleadoDialog" modal="true" header="Detalle del Empleado" >
+                                        <p:panelGrid columns="4" style="border: none">
+                                            <h:outputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="ID Empleado" />
+                                            <p:inputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="#{empleadoManejador.entidadSeleccionada.empIdPk}" />
+                                            <h:outputText value="Nombre" />
+                                            <p:inputText value="#{empleadoManejador.entidadSeleccionada.empNombres}" />
+                                            <h:outputText value="Apellido" />
+                                            <p:inputText value="#{empleadoManejador.entidadSeleccionada.empApellidos}" />
+                                            <h:outputText value="Documento" />
+                                            <p:inputText value="#{empleadoManejador.entidadSeleccionada.empDocumento}" />
+                                            <h:outputText value="Fecha de Nacimiento" />
+                                            <p:calendar value="#{empleadoManejador.entidadSeleccionada.empFechaNacimiento}" pattern="dd/MM/yyyy"/>
+                                            <h:outputText value="Correo Electronico " />
+                                            <p:inputText value="#{empleadoManejador.entidadSeleccionada.empCorreo}"/>
+
+
+
+
+                                            <h:outputText value="NIFFF " />
+                                            <p:inputText value="#{empleadoManejador.entidadSeleccionada.empNif}"/>
+
+                                            <h:outputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="Estado " />
+                                            
+                                            <p:selectOneMenu rendered="#{!empleadoManejador.esNuevaEntidad}" value="#{empleadoManejador.entidadSeleccionada}" >
+                                                <f:selectItem itemLabel="Activo" itemValue="true">
+                                                </f:selectItem>
+                                                <f:selectItem itemLabel="Inactivo" itemValue="false">
+                                                </f:selectItem>
+                                            </p:selectOneMenu>
+
+                                            <h:outputText value="Rol"/>
+                                            <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada}" >
+                                                <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles.rolIdPk}">
+
+                                                </f:selectItems>
+                                            </p:selectOneMenu>
+
+                                            <h:outputText value="Departamento" />
+                                            <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada}">
+                                                <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos.deptIdPk}">
+
+                                                </f:selectItems>
+                                            </p:selectOneMenu>
+
+
+                                        </p:panelGrid>
+                                        <p:panelGrid  >
+                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}" process="@this" update=":messages :formProductos :messagesAll" 
+                                                             onsuccess="PF('empleadoDialog').hide()" />
+                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" process="@this" update=":messages :formProductos :messagesAll" 
+                                                             onsuccess="PF('empleadoDialog').hide()"/>
+                                            <p:commandButton value="Cancelar" onsuccess="PF('empleadoDialog').hide()" />
+                                        </p:panelGrid>
+                                    </p:dialog>
+                                </h:form>
+                                ​
+                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                    <h:outputLabel value="Cargando..." />
+                                </p:dialog>
+
+
+
+
+
                             </div>
                         </div>
                         <div style="height: 100vh;"></div>
@@ -129,7 +230,7 @@
                 </footer>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>-->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../dist/js/scripts.js"></script>
     </h:body>
