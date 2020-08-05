@@ -34,7 +34,7 @@ public class DetallePlanillaManejador extends ManejadorAbstracto<Detalleplanilla
         listaPlanilla = detallePlaControlador.encontrarEntidades();
     }
     
-    
+
 
     @Override
     public DetalleplanillaControlador obtenerControlador() {

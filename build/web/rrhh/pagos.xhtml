@@ -115,7 +115,7 @@
                                     <p:commandButton value="Exportar en PDF" ajax="false" >
                                         <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
                                         <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="cars"
-                                                        />
+                                                        preProcessor="#{reporte.preProcessPDF}"            />
                                     </p:commandButton>
 
                                     <p:commandButton value="Exportar en CSV" ajax="false">
