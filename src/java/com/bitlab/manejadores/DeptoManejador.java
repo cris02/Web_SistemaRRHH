@@ -17,11 +17,11 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class DepartamentoManejador extends ManejadorAbstracto<Departamento>{
+public class DeptoManejador extends ManejadorAbstracto<Departamento>{
     
     private DepartamentoControlador departamentoControlador;
 
-    public DepartamentoManejador() {
+    public DeptoManejador() {
         super(Departamento.class);
         departamentoControlador = new DepartamentoControlador();
     }
