@@ -39,6 +39,7 @@ public abstract class ManejadorAbstracto<T>{
     //metodo para instanciar la entidad seleccionada
     public void nuevaEntidad(){
         try {
+            System.out.println("Ingresando una nueva entidad");
             entidadSeleccionada = claseEntidad.getDeclaredConstructor().newInstance();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +64,7 @@ public abstract class ManejadorAbstracto<T>{
             System.out.println("Ingresando a eliminar " +claseEntidad.getSimpleName());
             obtenerControlador().destruir(entidadSeleccionada);
             cargarInformacion();
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido Eliminada...");
         } catch (Exception ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +74,7 @@ public abstract class ManejadorAbstracto<T>{
         metodos Getter y Setter
     */
     public T getEntidadSeleccionada() {
+        System.out.println("ENTIDAD SELECCIONADA" + entidadSeleccionada);
         return entidadSeleccionada;
     }
 

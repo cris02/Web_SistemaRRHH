@@ -7,7 +7,9 @@ package com.bitlab.controladores;
 
 import com.bitlab.conexion.FabricaConexion;
 import com.bitlab.entidades.Empleado;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,6 +24,20 @@ public class EmpleadoControlador extends FabricaControladorAbstracto<Empleado>{
     @Override
     protected EntityManager obtenerManejadorEntidades() {
         return FabricaConexion.getInstancia().getManejadorEntidades().createEntityManager();
+    }
+    
+    //buscar campos por estado
+    public List<Empleado> encontrarEmpleadoEstado(Boolean estado) {
+        EntityManager em = obtenerManejadorEntidades();
+        try {
+            Query q = em.createQuery("SELECT e FROM Empleado e WHERE e.empEstado = :estado"); //codigo en jpql
+            q.setParameter("estado", estado);
+            return q.getResultList();
+        } finally {
+           if (em.isOpen()) {
+                em.close();
+            }
+        }
     }
     
 }

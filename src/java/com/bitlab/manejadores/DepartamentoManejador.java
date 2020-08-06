@@ -7,23 +7,23 @@ package com.bitlab.manejadores;
 
 import com.bitlab.controladores.DepartamentoControlador;
 import com.bitlab.entidades.Departamento;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
 
 /**
  *
  * @author Aguilar
  */
 
-@Named(value = "departamentoManejador")
+@ManagedBean
 @ViewScoped
 public class DepartamentoManejador extends ManejadorAbstracto<Departamento>{
-    //instanciar el controlador
+    
     private DepartamentoControlador departamentoControlador;
 
     public DepartamentoManejador() {
         super(Departamento.class);
-        departamentoControlador =  new DepartamentoControlador();
+        departamentoControlador = new DepartamentoControlador();
     }
 
     @Override
