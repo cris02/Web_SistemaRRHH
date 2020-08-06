@@ -114,7 +114,7 @@
                                 <p:growl id="messages" globalOnly="true" showDetail="true" />
                                 <p:messages id="messagesAll" />
                                 <h:form id="formProductos">
-                                    <p:dataTable lazy="true" var="empleado" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true">
+                                    <p:dataTable var="empleado" value="#{empleadoManejador.listaEmpleados}" paginator="true" rows="5" reflow="true">
                                         <p:column headerText="Id Empleado" sortBy="#{empleado.empIdPk}">
                                             <h:outputText value="#{empleado.empIdPk}" />
                                         </p:column>
@@ -127,7 +127,7 @@
                                         <p:column headerText="Documento">
                                             <h:outputText value="#{empleado.empDocumento}" />
                                         </p:column>
-                                        <p:column headerText="Fecha de Nacimiento" sortBy="#{empleado.empFechaNacimiento}">
+                                        <p:column headerText="Fecha de Nacimiento" >
                                             <h:outputText value="#{empleado.empFechaNacimiento}" />
                                         </p:column>
                                         <p:column headerText="Correo Electronico">
@@ -139,7 +139,6 @@
                                             </p:commandButton>
                                         </p:column>
                                     </p:dataTable>
-                                    ​
                                     <p:commandButton value="Crear" actionListener="#{empleadoManejador.nuevaEntidad()}" process="@this" update=":formDetailEmp" 
                                                      oncomplete="PF('empleadoDialog').show()" />
                                 </h:form>
@@ -147,8 +146,8 @@
                                 <h:form id="formDetailEmp">
                                     <p:dialog widgetVar="empleadoDialog" modal="true" header="Detalle del Empleado" >
                                         <p:panelGrid columns="4" style="border: none">
-                                            <h:outputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="ID Empleado" />
-                                            <p:inputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="#{empleadoManejador.entidadSeleccionada.empIdPk}" />
+                                            <h:outputText  value="ID Empleado" />
+                                            <p:inputText  value="#{empleadoManejador.entidadSeleccionada.empIdPk}" />
                                             <h:outputText value="Nombre" />
                                             <p:inputText value="#{empleadoManejador.entidadSeleccionada.empNombres}" />
                                             <h:outputText value="Apellido" />

@@ -23,15 +23,13 @@ public class DetallePlanillaManejador extends ManejadorAbstracto<Detalleplanilla
 //instanciar el controlador
     private DetalleplanillaControlador detPlaControlador;
     private List<Detalleplanilla> listaPlanilla;
-    private DetalleplanillaControlador detallePlaControlador;
     /**
      * Creates a new instance of DetallePlanillaManejador
      */
     public DetallePlanillaManejador() {
         super(Detalleplanilla.class);
         detPlaControlador =  new DetalleplanillaControlador();
-        detallePlaControlador = new DetalleplanillaControlador();
-        listaPlanilla = detallePlaControlador.encontrarEntidades();
+        listaPlanilla = detPlaControlador.encontrarEntidades();
     }
     
 
@@ -55,14 +53,6 @@ public class DetallePlanillaManejador extends ManejadorAbstracto<Detalleplanilla
 
     public void setListaPlanilla(List<Detalleplanilla> listaPlanilla) {
         this.listaPlanilla = listaPlanilla;
-    }
-
-    public DetalleplanillaControlador getDetallePlaControlador() {
-        return detallePlaControlador;
-    }
-
-    public void setDetallePlaControlador(DetalleplanillaControlador detallePlaControlador) {
-        this.detallePlaControlador = detallePlaControlador;
     }
     
     

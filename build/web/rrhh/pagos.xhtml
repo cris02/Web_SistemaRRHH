@@ -112,6 +112,7 @@
 
 
                                 <h:form>
+                                    <div style="float:right;padding-top: 5px;">
                                     <p:commandButton value="Exportar en PDF" ajax="false" >
                                         <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
                                         <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="cars"
@@ -119,20 +120,18 @@
                                     </p:commandButton>
 
                                     <p:commandButton value="Exportar en CSV" ajax="false">
-                                        <p:graphicImage name="https://image.shutterstock.com/image-vector/flat-sign-pdf-download-icon-260nw-1554245693.jpg" width="24"/>
                                         <p:dataExporter type="csv" target="tbl" fileName="cars" />
                                     </p:commandButton>    
-                                    
+                                    </div>
                                     <p:dataTable id="tbl" var="detalle" value="#{detallePlanillaManejador.entidadLista}"
-                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                                  paginator="true" rows="10" style="margin-bottom:20px">
 
-
-                                        <p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.empIdFk.empNombres}">
                                             <f:facet name="header">
                                                 <h:outputText value="Nombre Empleado" />
                                             </f:facet>
-                                            <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}" />
+                                            <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}"/>
                                         </p:column>
                                         <p:column>
                                             <f:facet name="header">
@@ -155,7 +154,7 @@
                                             <h:outputText value="#{detalle.dplaImpRenta}" />
                                         </p:column>
 
-                                        <p:column>
+                                        <p:column sortBy="#{detalle.dplaTotPagar}">
                                             <f:facet name="header">
                                                 <h:outputText value="Total a Pagar" />
                                             </f:facet>

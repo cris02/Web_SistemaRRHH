@@ -58,12 +58,12 @@ public class Reporte implements Serializable {
 
         //aqui pega o contexto para formar a url da imagem
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String logo = servletContext.getRealPath("") + File.separator + "/dist/assets/img" + File.separator + "logo.jpeg";
+        String logo = servletContext.getRealPath("") + File.separator + "/dist/assets/img" + File.separator + "logo.png";
 
         //cria a imagem e passando a url
         Image image = Image.getInstance(logo);
         
-        image.scalePercent(140);
+        image.scalePercent(10);
         image.setAbsolutePosition(0, PageSize.A4.getHeight() - image.getScaledHeight());
 
         //alinha ao centro
@@ -74,44 +74,50 @@ public class Reporte implements Serializable {
         pdf.add(image);
 
         Font fuente = new Font();
-        fuente.setSize(30);
+        fuente.setSize(20);
         //adiciona um paragrafo ao pdf, alinha também ao centro
         Paragraph p1 = new Paragraph(" ", fuente);
+        p1.setExtraParagraphSpace(10);
         Paragraph p = new Paragraph("Planilla de Pagos Bitlab", fuente);
         Paragraph p2 = new Paragraph(" ", fuente);
         p.setFont(new Font(Font.BOLD));
-        p.setExtraParagraphSpace(10);
+//        p.setExtraParagraphSpace(40);
+        p.setAlignment(1);
+        p.setSpacingBefore(50);
 //        p.setAlignment("center");
         pdf.add(p1);
         pdf.add(p);
         pdf.add(p2);
-        PdfPTable tabla = new PdfPTable(1);
-        Font colorBlanco = new Font();
-        colorBlanco.setColor(Color.white);
-        PdfPCell cell = new PdfPCell(new Phrase("some clever text", colorBlanco)); 
-        cell.setHorizontalAlignment(1);
-        Color myColor = WebColors.getRGBColor("#A00000"); 
-        cell.setBackgroundColor(myColor); 
-        tabla.addCell(cell);
         
         Paragraph abajo = new Paragraph("Persona encargada: Henry Callejas");
-        abajo.setSpacingAfter(40f);
+        abajo.setSpacingAfter(10f);
         pdf.add(abajo);
-        pdf.add(tabla);
         
-        Date fecha = new Date();
+        
         Calendar greg = new GregorianCalendar();
         String dia = Integer.toString(greg.get(Calendar.DAY_OF_MONTH));
-        String mes = Integer.toString(greg.get(Calendar.MONTH));
+        String mes = Integer.toString(greg.get(Calendar.MONTH) +1);
         String ano = Integer.toString(greg.get(Calendar.YEAR));
         greg.get(Calendar.HOUR);
         
 //        String fechaGenerada = fecha.getDay() +"/" + fecha.getMonth() + "/" +fecha.getYear() + " " + fecha.getHours() + ":" +fecha.getMinutes() + ":" +fecha.getSeconds();
-        String fechaGenerada = dia + "/" + mes + "/" + ano + " - " + greg.get(Calendar.HOUR) + ":" +greg.get(Calendar.MINUTE) + ":" + greg.get(Calendar.SECOND);
+        String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + greg.get(Calendar.HOUR) + ":" +greg.get(Calendar.MINUTE) + ":" + greg.get(Calendar.SECOND);
         Paragraph fecha1 = new Paragraph();
+        
         fecha1.add(fechaGenerada);
+        fecha1.setSpacingAfter(20f);
         pdf.add(fecha1);
         
+        
+        PdfPTable tabla = new PdfPTable(3);
+        Font colorBlanco = new Font();
+        colorBlanco.setColor(Color.white);
+        PdfPCell cell = new PdfPCell(new Phrase("some clever text", colorBlanco)); 
+        cell.setHorizontalAlignment(1);
+        Color myColor = WebColors.getRGBColor("#5a01b7"); 
+        cell.setBackgroundColor(myColor); 
+        tabla.addCell(cell);
+        pdf.add(tabla);
 
     }
 }

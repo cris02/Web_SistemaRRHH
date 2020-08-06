@@ -23,7 +23,8 @@ import javax.inject.Named;
  */
 @Named(value = "empleadoManejador")
 @SessionScoped
-public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements Serializable{
+public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements Serializable {
+
     private EmpleadoControlador empleadoControlado;
     private RolControlador rolControlador;
     private DepartamentoControlador deptControlador;
@@ -31,8 +32,7 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
     private Departamento departamento;
     private List<Rol> rolLista;
     private List<Departamento> departamentoLista;
-    
-    
+    private List<Empleado> listaEmpleados;
 
     public EmpleadoManejador() {
         super(Empleado.class);
@@ -41,6 +41,7 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
         deptControlador = new DepartamentoControlador();
         rolLista = rolControlador.encontrarEntidades();
         departamentoLista = deptControlador.encontrarEntidades();
+        listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
     }
 
     @Override
@@ -48,8 +49,6 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
         super.nuevaEntidad(); //To change body of generated methods, choose Tools | Templates.
         getEntidadSeleccionada().setEmpEstado(true);
     }
-    
-    
 
     @Override
     public FabricaControladorAbstracto<Empleado> obtenerControlador() {
@@ -112,9 +111,12 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
         this.departamentoLista = departamentoLista;
     }
 
-    
-    
-    
-    
-    
+    public List<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
+
+    public void setListaEmpleados(List<Empleado> listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
+    }
+
 }

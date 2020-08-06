@@ -20,7 +20,6 @@ public abstract class ManejadorAbstracto<T>{
     private T entidadSeleccionada;
     private List<T> entidadLista;
     private final Class<T> claseEntidad;
-    private List<Empleado> listaEmpleados;
     private boolean esNuevaEntidad;
     
     //metodo que retorna la instancia de la entidad
@@ -31,7 +30,6 @@ public abstract class ManejadorAbstracto<T>{
     @PostConstruct //metodo que se carga cuando se crea la instancia del manejador abstracto
     public void cargarInformacion(){
         entidadLista = obtenerControlador().encontrarEntidades();
-        listaEmpleados = obtenerControlador().encontrarEmpleadoEstado(true);
         nuevaEntidad(); //CAMBIADO
     }
     
@@ -96,10 +94,6 @@ public abstract class ManejadorAbstracto<T>{
 
     public void setEntidadLista(List<T> entidadLista) {
         this.entidadLista = entidadLista;
-    }
-
-    public List<Empleado> getListaEmpleados() {
-        return listaEmpleados;
     }
 
     public boolean isEsNuevaEntidad() {

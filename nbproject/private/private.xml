@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/pagos.xhtml</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/utilidades/exportadorPdf.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Planilla.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/DetallePlanillaManejador.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/EmpleadoManejador.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/actualizacion.xhtml</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Detalleplanilla.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Contrato.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/utilidades/Reporte.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Empleado.java</file>
         </group>
     </open-files>
