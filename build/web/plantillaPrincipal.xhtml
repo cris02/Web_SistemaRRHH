@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <h:head>
         <title>Sistema de gestion de Recursos Humanos</title>
@@ -11,8 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link href="dist/css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </h:head>
 
     <h:body class="sb-nav-fixed">
@@ -26,7 +23,7 @@
 
         <!--  inicio del Navbar-->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.xhtml">Sistema RH-BITLAB</a>
+            <a class="navbar-brand" href="admin.xhtml">RH-BITLAB</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -62,7 +59,7 @@
                         <!--menu dinamico-->
                         <ui:insert name="menuAdmin"></ui:insert>
                         <ui:insert name="menuRH"></ui:insert>
-                        
+
                     </div>
                     <!--Inicio de sidebar Menu-->
 
@@ -79,17 +76,17 @@
                     <div class="container-fluid">
                         <!--AQUI IRA EL CONTENIDO-->
 
-                        <ui:insert name="top">
-                            <p:growl id="messages" globalOnly="true" showDetail="true" />
-                            <p:messages id="messagesAll" />
-                        </ui:insert>
+                        <h1 class="mt-4">Bienvenido al sistema</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Pagina Principal</li>
+                        </ol>
 
-
-                        <ui:insert name="content">Content</ui:insert>
-                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                            <h:outputLabel value="Cargarndo..." />
-                        </p:dialog>
+                        <div class="row">
+                            <div class="card mb-4">
+                                <!--AQUI IRA EL DASBOARD-->
+                            </div>
+                        </div>
 
                     </div>
                 </main>
@@ -115,16 +112,9 @@
         </div>
         <!--Fin de layoutSidenav-->
 
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="dist/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="dist/assets/demo/chart-area-demo.js"></script>
-        <script src="dist/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="dist/assets/demo/datatables-demo.js"></script>
     </h:body>
 
 </html>

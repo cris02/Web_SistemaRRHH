@@ -24,4 +24,5 @@ public class DepartamentoControlador extends FabricaControladorAbstracto<Departa
         return FabricaConexion.getInstancia().getManejadorEntidades().createEntityManager();
     }
     
+    
 }

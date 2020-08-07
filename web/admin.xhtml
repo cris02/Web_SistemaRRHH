@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         <!--menu de admin-->
@@ -9,21 +10,25 @@
             <ui:define name="menuAdmin">
 
                 <div class="nav">
-                     <div class="sb-sidenav-menu-heading">MODULO ADMINISTRACION</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Administracion
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <h:link class="nav-link" outcome="/catalogos/departamentos" value="Gestionar Despartamento" />
-                                    <h:link class="nav-link" outcome="/catalogos/usuarios" value="Gestionar Usuarios" />
-                                    <h:link class="nav-link" outcome="/catalogos/roles" value="Gestionar Roles" />
-                                    <h:link class="nav-link" outcome="/catalogos/estados" value="Gestionar Estados de Empleado" />
-                                    
-                                </nav>
-                            </div>
+                    <div class="sb-sidenav-menu-heading">MODULO ADMINISTRACION</div>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Administracion
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <h:link class="nav-link" outcome="/admin/departamentos" value="Gestionar Despartamento" />
+                            <h:link class="nav-link" outcome="/admin/usuarios" value="Gestionar Usuarios" />
+                            <h:link class="nav-link" outcome="/admin/roles" value="Gestionar Roles" />
+                            <h:link class="nav-link" outcome="/admin/estados" value="Gestionar Estados de Empleado" />    
+
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargarndo..." />
+                            </p:dialog>
+                        </nav>
+                    </div>
                 </div>
                 <!--menu de admin-->
 

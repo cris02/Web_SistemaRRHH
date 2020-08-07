@@ -41,6 +41,7 @@ public abstract class ManejadorAbstracto<T>{
     //metodo para instanciar la entidad seleccionada
     public void nuevaEntidad(){
         try {
+            System.out.println("Ingresando una nueva entidad");
             entidadSeleccionada = claseEntidad.getDeclaredConstructor().newInstance();
             setEsNuevaEntidad(true);
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
@@ -81,6 +82,7 @@ public abstract class ManejadorAbstracto<T>{
         metodos Getter y Setter
     */
     public T getEntidadSeleccionada() {
+        System.out.println("ENTIDAD SELECCIONADA" + entidadSeleccionada);
         return entidadSeleccionada;
     }
 
