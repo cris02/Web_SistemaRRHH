@@ -16,15 +16,17 @@ import com.bitlab.utilidades.Utilidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 /**
  *
  * @author henry
  */
-@Named(value = "empleadoManejador")
-@SessionScoped
-public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements Serializable {
+@ManagedBean
+@ViewScoped
+public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
 
     private EmpleadoControlador empleadoControlado;
     private RolControlador rolControlador;
@@ -45,21 +47,18 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
         listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
     }
 
+    private boolean selectEstado;
 //    private boolean estadoActivoInactivo;
-    public void cambiarEstado() {
+    public void cambiarEstado(Empleado empleado) {
+        setEntidadSeleccionada(empleado);
+        this.selectEstado = getEntidadSeleccionada().getEmpEstado();
+        getEntidadSeleccionada().setEmpEstado(selectEstado);
+        super.guardarEntidad();
+        
+        
         String estado = this.getEntidadSeleccionada().getEmpEstado() ? "true" : "false";
-        this.getEntidadSeleccionada().setEmpEstado(Boolean.parseBoolean(estado));
-        guardarEntidad();
         Utilidades.lanzarMensajeInfo("Estado cambiado ", "Estado cambiado a " +estado);
     }
-
-//    public boolean isEstadoActivoInactivo() {
-//        return estadoActivoInactivo;
-//    }
-//
-//    public void setEstadoActivoInactivo(boolean estadoActivoInactivo) {
-//        this.estadoActivoInactivo = estadoActivoInactivo;
-//    }
     
     @Override
     public void nuevaEntidad() {

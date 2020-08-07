@@ -128,9 +128,9 @@
                                             <h:outputText value="#{empleado.empDocumento}" />
                                         </p:column>
                                         <p:column headerText="Estado de Empleado" >
-                                            <p:toggleSwitch value="#{empleado.empEstado}">
-                                                <p:ajax listener="#{empleadoManejador.cambiarEstado()}" update="messages formProductos" />
-                                            </p:toggleSwitch>
+                                            <p:inputSwitch value="#{empleado.empEstado}">
+                                                <p:ajax listener="#{empleadoManejador.cambiarEstado(empleado)}" process="@this" update=":messages"/>
+                                            </p:inputSwitch>
                                         </p:column>
                                         <p:column headerText="Correo Electronico">
                                             <h:outputText value="#{empleado.empCorreo}" />

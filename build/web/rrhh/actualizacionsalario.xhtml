@@ -138,6 +138,7 @@
                 </p:column>
             </p:dataTable>
         </h:form>
+        
         <h:form id="formDetailDepto">
             <p:dialog widgetVar="detailDialog" modal="true" header="Detalle del Departamento" >
                 <p:panelGrid id="panelGrid" columns="2" >
@@ -156,6 +157,7 @@
                 </p:panelGrid>
             </p:dialog>
         </h:form>
+        
         <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
         <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
             <h:outputLabel value="Cargando..." />

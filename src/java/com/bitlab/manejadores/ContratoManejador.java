@@ -11,6 +11,7 @@ import com.bitlab.entidades.Contrato;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 
@@ -18,9 +19,9 @@ import javax.faces.bean.ViewScoped;
  *
  * @author henry
  */
-@Named(value = "contratoManejador")
-@SessionScoped
-public class ContratoManejador extends ManejadorAbstracto<Contrato> implements Serializable{
+@ManagedBean
+@ViewScoped
+public class ContratoManejador extends ManejadorAbstracto<Contrato>{
     private ContratoControlador contratoControlador;
 //    private List<Contrato> listaContrato;
     /**
@@ -37,13 +38,13 @@ public class ContratoManejador extends ManejadorAbstracto<Contrato> implements S
         return contratoControlador;
     }
 
-    public ContratoControlador getContratoControlador() {
-        return contratoControlador;
-    }
-
-    public void setContratoControlador(ContratoControlador contratoControlador) {
-        this.contratoControlador = contratoControlador;
-    }
+//    public ContratoControlador getContratoControlador() {
+//        return contratoControlador;
+//    }
+//
+//    public void setContratoControlador(ContratoControlador contratoControlador) {
+//        this.contratoControlador = contratoControlador;
+//    }
 
 //    public List<Contrato> getListaContrato() {
 //        return listaContrato;
