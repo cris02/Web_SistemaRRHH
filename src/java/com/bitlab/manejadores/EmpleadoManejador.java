@@ -12,6 +12,7 @@ import com.bitlab.controladores.RolControlador;
 import com.bitlab.entidades.Departamento;
 import com.bitlab.entidades.Empleado;
 import com.bitlab.entidades.Rol;
+import com.bitlab.utilidades.Utilidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -44,6 +45,22 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> implements S
         listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
     }
 
+//    private boolean estadoActivoInactivo;
+    public void cambiarEstado() {
+        String estado = this.getEntidadSeleccionada().getEmpEstado() ? "true" : "false";
+        this.getEntidadSeleccionada().setEmpEstado(Boolean.parseBoolean(estado));
+        guardarEntidad();
+        Utilidades.lanzarMensajeInfo("Estado cambiado ", "Estado cambiado a " +estado);
+    }
+
+//    public boolean isEstadoActivoInactivo() {
+//        return estadoActivoInactivo;
+//    }
+//
+//    public void setEstadoActivoInactivo(boolean estadoActivoInactivo) {
+//        this.estadoActivoInactivo = estadoActivoInactivo;
+//    }
+    
     @Override
     public void nuevaEntidad() {
         super.nuevaEntidad(); //To change body of generated methods, choose Tools | Templates.

@@ -11,6 +11,7 @@ import com.bitlab.utilidades.Utilidades;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -46,6 +47,8 @@ public class InicioSesionManejador implements Serializable {
                 }else if(us.getRolIdFk().getRolNombrerol().equals("ADMINISTRADOR SISTEMA")){
                     Utilidades.redireccionar("admin");
                 }
+                us.setUsuFechaConexion(new Date());
+                    System.out.println("Fecha de sesion " + us.getUsuFechaConexion());
             }
             }else{
                 Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Usuario invalido", "Usuario o contrasena son invalidos");

@@ -2,7 +2,6 @@
 package com.bitlab.manejadores;
 
 import com.bitlab.controladores.FabricaControladorAbstracto;
-import com.bitlab.entidades.Empleado;
 import com.bitlab.utilidades.Utilidades;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -56,8 +55,9 @@ public abstract class ManejadorAbstracto<T>{
         try {
             System.out.println("Ingresando a guardar " +claseEntidad.getSimpleName()); 
             obtenerControlador().editar(entidadSeleccionada);
-            cargarInformacion();
+            
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
+            cargarInformacion();
         } catch (Exception ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error", claseEntidad.getSimpleName() +" no ha sido guardado...");

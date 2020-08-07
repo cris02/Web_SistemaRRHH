@@ -127,8 +127,10 @@
                                         <p:column headerText="Documento">
                                             <h:outputText value="#{empleado.empDocumento}" />
                                         </p:column>
-                                        <p:column headerText="Fecha de Nacimiento" >
-                                            <h:outputText value="#{empleado.empFechaNacimiento}" />
+                                        <p:column headerText="Estado de Empleado" >
+                                            <p:toggleSwitch value="#{empleado.empEstado}">
+                                                <p:ajax listener="#{empleadoManejador.cambiarEstado()}" update="messages formProductos" />
+                                            </p:toggleSwitch>
                                         </p:column>
                                         <p:column headerText="Correo Electronico">
                                             <h:outputText value="#{empleado.empCorreo}" />
@@ -166,7 +168,7 @@
                                             <p:inputText value="#{empleadoManejador.entidadSeleccionada.empNif}"/>
 
                                             <h:outputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="Estado " />
-                                            
+
                                             <p:selectOneMenu rendered="#{!empleadoManejador.esNuevaEntidad}" value="#{empleadoManejador.entidadSeleccionada}" >
                                                 <f:selectItem itemLabel="Activo" itemValue="true">
                                                 </f:selectItem>
@@ -175,15 +177,15 @@
                                             </p:selectOneMenu>
 
                                             <h:outputText value="Rol"/>
-                                            <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada}" >
-                                                <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles.rolIdPk}">
+                                            <p:selectOneMenu value="#{empleadoManejador.rol}" converter="rolConvertidor">
+                                                <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles}">
 
                                                 </f:selectItems>
                                             </p:selectOneMenu>
 
                                             <h:outputText value="Departamento" />
-                                            <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada}">
-                                                <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos.deptIdPk}">
+                                            <p:selectOneMenu value="#{empleadoManejador.departamento}" converter="departamentoConvertidor">
+                                                <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos}">
 
                                                 </f:selectItems>
                                             </p:selectOneMenu>
@@ -191,9 +193,9 @@
 
                                         </p:panelGrid>
                                         <p:panelGrid  >
-                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}" process="@this" update=":messages :formProductos :messagesAll" 
+                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}"  update=":messages :formProductos :messagesAll" 
                                                              onsuccess="PF('empleadoDialog').hide()" />
-                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" process="@this" update=":messages :formProductos :messagesAll" 
+                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" update=":messages :formProductos :messagesAll" 
                                                              onsuccess="PF('empleadoDialog').hide()"/>
                                             <p:commandButton value="Cancelar" onsuccess="PF('empleadoDialog').hide()" />
                                         </p:panelGrid>

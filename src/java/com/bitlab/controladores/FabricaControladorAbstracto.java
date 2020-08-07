@@ -7,12 +7,9 @@ package com.bitlab.controladores;
 
 import com.bitlab.entidades.Empleado;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -78,12 +75,11 @@ public abstract class FabricaControladorAbstracto<T> {
         EntityManager em = obtenerManejadorEntidades();
         try {
             //iniciar la transaccion
-            if(!em.getTransaction().isActive()){
+//            if(!em.getTransaction().isActive()){
                 em.getTransaction().begin();
                 em.merge(entidad);
                 em.getTransaction().commit();
-            }
-
+//            }
         } catch (Exception e) {
             //regresar al estado original si ha ocurrido algun problema
             System.out.println("ERORRRRRR " +e.getMessage());
