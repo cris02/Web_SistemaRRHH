@@ -114,7 +114,7 @@
                                 <p:growl id="messages" globalOnly="true" showDetail="true" />
                                 <p:messages id="messagesAll" />
                                 <h:form id="formProductos">
-                                    <p:dataTable var="empleado" value="#{empleadoManejador.listaEmpleados}" paginator="true" rows="5" reflow="true">
+                                    <p:dataTable var="empleado" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true">
                                         <p:column headerText="Id Empleado" sortBy="#{empleado.empIdPk}">
                                             <h:outputText value="#{empleado.empIdPk}" />
                                         </p:column>
@@ -128,7 +128,7 @@
                                             <h:outputText value="#{empleado.empDocumento}" />
                                         </p:column>
                                         <p:column headerText="Estado de Empleado" >
-                                            <p:inputSwitch value="#{empleado.empEstado}">
+                                            <p:inputSwitch value="#{empleado.empEstado}" onLabel="Activado" offLabel="Desactivado">
                                                 <p:ajax listener="#{empleadoManejador.cambiarEstado(empleado)}" process="@this" update=":messages"/>
                                             </p:inputSwitch>
                                         </p:column>
@@ -177,14 +177,14 @@
                                             </p:selectOneMenu>
 
                                             <h:outputText value="Rol"/>
-                                            <p:selectOneMenu value="#{empleadoManejador.rol}" converter="rolConvertidor">
+                                            <p:selectOneMenu value="#{empleadoManejador.rol}" >
                                                 <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles}">
 
                                                 </f:selectItems>
                                             </p:selectOneMenu>
 
                                             <h:outputText value="Departamento" />
-                                            <p:selectOneMenu value="#{empleadoManejador.departamento}" converter="departamentoConvertidor">
+                                            <p:selectOneMenu value="#{empleadoManejador.departamento}" >
                                                 <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos}">
 
                                                 </f:selectItems>

@@ -18,14 +18,14 @@ import javax.faces.convert.FacesConverter;
  *
  * @author henry
  */
-@FacesConverter("departamentoConvertidor")
+@FacesConverter(forClass = Departamento.class)
 public class DepartamentoConvertidor implements Converter{
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         try {
             DepartamentoControlador departamentoControlador = new DepartamentoControlador();
-            return departamentoControlador.encontrar(value);
+            return departamentoControlador.encontrar(Integer.valueOf(value));
         } catch (Exception ex) {
             Logger.getLogger(DepartamentoConvertidor.class.getName()).log(Level.SEVERE, null, ex);
         }

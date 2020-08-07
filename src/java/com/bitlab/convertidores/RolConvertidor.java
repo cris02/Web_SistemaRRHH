@@ -18,14 +18,14 @@ import javax.faces.convert.FacesConverter;
  *
  * @author henry
  */
-@FacesConverter("rolConvertidor")
+@FacesConverter(forClass = Rol.class)
 public class RolConvertidor implements Converter{
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         try {
             RolControlador rolControlador = new RolControlador();
-            return rolControlador.encontrar(value);
+            return rolControlador.encontrar(Integer.valueOf(value));
         } catch (Exception ex) {
             Logger.getLogger(RolConvertidor.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -23,37 +23,18 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ContratoManejador extends ManejadorAbstracto<Contrato>{
     private ContratoControlador contratoControlador;
-//    private List<Contrato> listaContrato;
+
     /**
      * Creates a new instance of ContratoManejador
      */
     public ContratoManejador() {
         super(Contrato.class);
         contratoControlador = new ContratoControlador();
-//        listaContrato = contratoControlador.encontrarEntidades();
     }
 
     @Override
     public FabricaControladorAbstracto<Contrato> obtenerControlador() {
         return contratoControlador;
     }
-
-//    public ContratoControlador getContratoControlador() {
-//        return contratoControlador;
-//    }
-//
-//    public void setContratoControlador(ContratoControlador contratoControlador) {
-//        this.contratoControlador = contratoControlador;
-//    }
-
-//    public List<Contrato> getListaContrato() {
-//        return listaContrato;
-//    }
-//
-//    public void setListaContrato(List<Contrato> listaContrato) {
-//        this.listaContrato = listaContrato;
-//    }
-    
-    
     
 }

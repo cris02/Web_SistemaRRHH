@@ -54,8 +54,6 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
         this.selectEstado = getEntidadSeleccionada().getEmpEstado();
         getEntidadSeleccionada().setEmpEstado(selectEstado);
         super.guardarEntidad();
-        
-        
         String estado = this.getEntidadSeleccionada().getEmpEstado() ? "true" : "false";
         Utilidades.lanzarMensajeInfo("Estado cambiado ", "Estado cambiado a " +estado);
     }
