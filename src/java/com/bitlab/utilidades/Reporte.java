@@ -17,6 +17,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.html.WebColors;
+import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.awt.Color;
@@ -44,8 +45,9 @@ public class Reporte implements Serializable {
         Document pdf = (Document) document;
 
         //seta a margin e página, precisa estar antes da abertura do documento, ou seja da linha: pdf.open()
-        pdf.setMargins(20f, 20f, 20f, 20f);
-        pdf.setPageSize(PageSize.A4);
+        pdf.setMargins(10f, 10f, 10f, 10f);
+        pdf.setPageSize(PageSize.A4.rotate());
+        
         pdf.addTitle("Título here brother");
         pdf.addCreationDate();
         pdf.addAuthor("Henry Callejas");
@@ -63,8 +65,9 @@ public class Reporte implements Serializable {
         //cria a imagem e passando a url
         Image image = Image.getInstance(logo);
         
-        image.scalePercent(10);
-        image.setAbsolutePosition(0, PageSize.A4.getHeight() - image.getScaledHeight());
+//        image.scalePercent(11);
+        image.scalePercent(12, 8.7f);
+        image.setAbsolutePosition(0, PageSize.A4.rotate().getHeight() - image.getScaledHeight());
 
         //alinha ao centro
         image.setAlignment(Image.ALIGN_CENTER);
@@ -108,16 +111,45 @@ public class Reporte implements Serializable {
         fecha1.setSpacingAfter(20f);
         pdf.add(fecha1);
         
-        
-        PdfPTable tabla = new PdfPTable(3);
+        PdfPTable tabla = new PdfPTable(1);
         Font colorBlanco = new Font();
         colorBlanco.setColor(Color.white);
         PdfPCell cell = new PdfPCell(new Phrase("some clever text", colorBlanco)); 
         cell.setHorizontalAlignment(1);
+        
+       
         Color myColor = WebColors.getRGBColor("#5a01b7"); 
         cell.setBackgroundColor(myColor); 
         tabla.addCell(cell);
+        
+        PdfPTable tabla2 = new PdfPTable(8);
+        PdfPCell cell1 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell2 = new PdfPCell(new Phrase("Descuentos"));
+        PdfPCell cell3= new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell4 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell5 = new PdfPCell(new Phrase("Descuentos", colorBlanco));
+        PdfPCell cell6 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell7 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell8 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        cell2.setColspan(3);
+        cell2.setPaddingLeft(90);
+        cell1.setColspan(4);
+        tabla2.addCell(cell1);
+        tabla2.addCell(cell2);
+        tabla2.addCell(cell3);
+        tabla2.addCell(cell4);
+        tabla2.addCell(cell5);
+        tabla2.addCell(cell6);
+        tabla2.addCell(cell7);
+        tabla2.addCell(cell8);
+        
+        
+        
+        tabla.setSpacingAfter(20f);
         pdf.add(tabla);
+        pdf.add(tabla2);
+        
+        
 
     }
 }

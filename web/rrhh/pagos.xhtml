@@ -113,41 +113,60 @@
 
                                 <h:form>
                                     <div style="float:right;padding-top: 5px;">
-                                    <p:commandButton value="Exportar en PDF" ajax="false" >
-                                        <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
-                                        <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="cars"
-                                                        preProcessor="#{reporte.preProcessPDF}"            />
-                                    </p:commandButton>
+                                        <p:commandButton value="Exportar en PDF" ajax="false" >
+                                            <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
+                                            <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="cars"
+                                                            preProcessor="#{reporte.preProcessPDF}"            />
+                                        </p:commandButton>
 
-                                    <p:commandButton value="Exportar en CSV" ajax="false">
-                                        <p:dataExporter type="csv" target="tbl" fileName="cars" />
-                                    </p:commandButton>    
+                                        <p:commandButton value="Exportar en CSV" ajax="false">
+                                            <p:dataExporter type="csv" target="tbl" fileName="cars" />
+                                        </p:commandButton>    
                                     </div>
+                                    
                                     <p:dataTable id="tbl" var="detalle" value="#{detallePlanillaManejador.entidadLista}"
                                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                                                  paginator="true" rows="10" style="margin-bottom:20px">
 
+                                            
                                         <p:column sortBy="#{detalle.contIdPk.empIdFk.empNombres}">
                                             <f:facet name="header">
                                                 <h:outputText value="Nombre Empleado" />
                                             </f:facet>
                                             <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}"/>
                                         </p:column>
-                                        <p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}">
                                             <f:facet name="header">
-                                                <h:outputText value="ISSS" />
+                                                <h:outputText value="Cargo" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}"/>
+                                        </p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.contDiasLaborados}" style="width: 6%">
+                                            <f:facet name="header">
+                                                <h:outputText value="Dias Trab" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.contDiasLaborados}"/>
+                                        </p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.contSalario}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Sueldo Base" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.contSalario}"/>
+                                        </p:column>
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaIsss}">
+                                            <f:facet name="header">
+                                                <h:outputText value="ISSS"/>
                                             </f:facet>
                                             <h:outputText value="#{detalle.dplaIsss}" />
                                         </p:column>
-
-                                        <p:column>
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaAfp}">
                                             <f:facet name="header">
                                                 <h:outputText value="AFP"/>
                                             </f:facet>
                                             <h:outputText value="#{detalle.dplaAfp}" />
                                         </p:column>
 
-                                        <p:column>
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaImpRenta}">
                                             <f:facet name="header">
                                                 <h:outputText value="Renta" />
                                             </f:facet>
