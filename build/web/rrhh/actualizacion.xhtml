@@ -113,7 +113,7 @@
                                 <h1>Lista de Empleados</h1>
                                 <p:growl id="messages" globalOnly="true" showDetail="true" />
                                 <p:messages id="messagesAll" />
-                                <h:form id="formProductos">
+                                <h:form id="formEmpleados">
                                     <p:dataTable var="empleado" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true">
                                         <p:column headerText="Id Empleado" sortBy="#{empleado.empIdPk}">
                                             <h:outputText value="#{empleado.empIdPk}" />
@@ -160,15 +160,10 @@
                                             <p:calendar value="#{empleadoManejador.entidadSeleccionada.empFechaNacimiento}" pattern="dd/MM/yyyy"/>
                                             <h:outputText value="Correo Electronico " />
                                             <p:inputText value="#{empleadoManejador.entidadSeleccionada.empCorreo}"/>
-
-
-
-
                                             <h:outputText value="NIFFF " />
                                             <p:inputText value="#{empleadoManejador.entidadSeleccionada.empNif}"/>
 
                                             <h:outputText rendered="#{!empleadoManejador.esNuevaEntidad}" value="Estado " />
-
                                             <p:selectOneMenu rendered="#{!empleadoManejador.esNuevaEntidad}" value="#{empleadoManejador.entidadSeleccionada}" >
                                                 <f:selectItem itemLabel="Activo" itemValue="true">
                                                 </f:selectItem>
@@ -179,23 +174,21 @@
                                             <h:outputText value="Rol"/>
                                             <p:selectOneMenu value="#{empleadoManejador.rol}" >
                                                 <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles}">
-
                                                 </f:selectItems>
                                             </p:selectOneMenu>
 
                                             <h:outputText value="Departamento" />
                                             <p:selectOneMenu value="#{empleadoManejador.departamento}" >
                                                 <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos}">
-
                                                 </f:selectItems>
                                             </p:selectOneMenu>
 
 
                                         </p:panelGrid>
                                         <p:panelGrid  >
-                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}"  update=":messages :formProductos :messagesAll" 
+                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}"  update=":messages :formEmpleados :messagesAll" 
                                                              onsuccess="PF('empleadoDialog').hide()" />
-                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" update=":messages :formProductos :messagesAll" 
+                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" update=":messages :formEmpleados :messagesAll" 
                                                              onsuccess="PF('empleadoDialog').hide()"/>
                                             <p:commandButton value="Cancelar" onsuccess="PF('empleadoDialog').hide()" />
                                         </p:panelGrid>
@@ -206,10 +199,6 @@
                                 <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                     <h:outputLabel value="Cargando..." />
                                 </p:dialog>
-
-
-
-
 
                             </div>
                         </div>

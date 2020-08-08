@@ -13,12 +13,9 @@ import com.bitlab.entidades.Departamento;
 import com.bitlab.entidades.Empleado;
 import com.bitlab.entidades.Rol;
 import com.bitlab.utilidades.Utilidades;
-import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
 
 /**
  *
@@ -36,6 +33,10 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     private List<Rol> rolLista;
     private List<Departamento> departamentoLista;
     private List<Empleado> listaEmpleados;
+    private boolean selectEstado;
+    private String numeroEmpleados;
+    private String numeroEmpleadosInactivos;
+    private int inactivos;
 
     public EmpleadoManejador() {
         super(Empleado.class);
@@ -45,10 +46,27 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
         rolLista = rolControlador.encontrarEntidades();
         departamentoLista = deptControlador.encontrarEntidades();
         listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
+        numeroEmpleados = String.valueOf(listaEmpleados.size());
     }
 
-    private boolean selectEstado;
-//    private boolean estadoActivoInactivo;
+    public String getNumeroEmpleadosInactivos() {
+        return numeroEmpleadosInactivos;
+    }
+
+    public void setNumeroEmpleadosInactivos(String numeroEmpleadosInactivos) {
+        this.numeroEmpleadosInactivos = numeroEmpleadosInactivos;
+    }
+    
+
+    public String getNumeroEmpleados() {
+        return numeroEmpleados;
+    }
+
+    public void setNumeroEmpleados(String numeroEmpleados) {
+        this.numeroEmpleados = numeroEmpleados;
+    }
+
+    
     public void cambiarEstado(Empleado empleado) {
         setEntidadSeleccionada(empleado);
         this.selectEstado = getEntidadSeleccionada().getEmpEstado();
@@ -132,5 +150,15 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     public void setListaEmpleados(List<Empleado> listaEmpleados) {
         this.listaEmpleados = listaEmpleados;
     }
+
+    public boolean isSelectEstado() {
+        return selectEstado;
+    }
+
+    public void setSelectEstado(boolean selectEstado) {
+        this.selectEstado = selectEstado;
+    }
+
+    
 
 }

@@ -5,16 +5,24 @@
         <group>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/controladores/FabricaControladorAbstracto.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/InicioSesionManejador.java</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/admin/departamentos.xhtml</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/newTemplateClient.xhtml</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/DetallePlanillaManejador.java</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/actualizacionsalario.xhtml</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/EmpleadoManejador.java</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/actualizacion.xhtml</file>
-            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/ContratoManejador.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/plantillaPrincipal.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh3.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/ManejadorAbstracto.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/admin/roles.xhtml</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh.xhtml</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Contrato.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/utilidades/Reporte.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/actualiza.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/pagos.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/pagosgen.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/web/rrhh/actualizacionsalario.xhtml</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/convertidores/RolConvertidor.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Detalleplanilla.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/convertidores/DepartamentoConvertidor.java</file>
             <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/manejadores/DeptoManejador.java</file>
+            <file>file:/home/henry/NetBeansProjects/mavenproject2/AQUI/Web_SistemaRRHH2/src/java/com/bitlab/entidades/Empleado.java</file>
         </group>
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ package com.bitlab.utilidades;
 import com.bitlab.controladores.PlanillaControlador;
 import com.bitlab.manejadores.DetallePlanillaManejador;
 import com.lowagie.text.BadElementException;
+import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
@@ -16,6 +17,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Row;
 import com.lowagie.text.html.WebColors;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPCell;
@@ -32,6 +34,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 /**
  *
@@ -47,7 +53,7 @@ public class Reporte implements Serializable {
         //seta a margin e página, precisa estar antes da abertura do documento, ou seja da linha: pdf.open()
         pdf.setMargins(10f, 10f, 10f, 10f);
         pdf.setPageSize(PageSize.A4.rotate());
-        
+
         pdf.addTitle("Título here brother");
         pdf.addCreationDate();
         pdf.addAuthor("Henry Callejas");
@@ -64,14 +70,13 @@ public class Reporte implements Serializable {
 
         //cria a imagem e passando a url
         Image image = Image.getInstance(logo);
-        
+
 //        image.scalePercent(11);
         image.scalePercent(12, 8.7f);
         image.setAbsolutePosition(0, PageSize.A4.rotate().getHeight() - image.getScaledHeight());
 
         //alinha ao centro
         image.setAlignment(Image.ALIGN_CENTER);
-        
 
         //adciona a img ao pdf
         pdf.add(image);
@@ -91,49 +96,58 @@ public class Reporte implements Serializable {
         pdf.add(p1);
         pdf.add(p);
         pdf.add(p2);
-        
+
         Paragraph abajo = new Paragraph("Persona encargada: Henry Callejas");
         abajo.setSpacingAfter(10f);
         pdf.add(abajo);
-        
-        
+
         Calendar greg = new GregorianCalendar();
         String dia = Integer.toString(greg.get(Calendar.DAY_OF_MONTH));
-        String mes = Integer.toString(greg.get(Calendar.MONTH) +1);
+        String mes = Integer.toString(greg.get(Calendar.MONTH) + 1);
         String ano = Integer.toString(greg.get(Calendar.YEAR));
-        greg.get(Calendar.HOUR);
+        String hora = Integer.toString(greg.get(Calendar.HOUR));
+        String minutos = Integer.toString(greg.get(Calendar.MINUTE));
+        String segundos = Integer.toString(greg.get(Calendar.SECOND));
         
-//        String fechaGenerada = fecha.getDay() +"/" + fecha.getMonth() + "/" +fecha.getYear() + " " + fecha.getHours() + ":" +fecha.getMinutes() + ":" +fecha.getSeconds();
-        String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + greg.get(Calendar.HOUR) + ":" +greg.get(Calendar.MINUTE) + ":" + greg.get(Calendar.SECOND);
+        if(Integer.valueOf(dia) >=1 && Integer.valueOf(dia)<=9){
+            dia = "0" +dia;
+        }if(Integer.valueOf(mes) >=1 && Integer.valueOf(mes)<=9){
+            mes = "0" +mes;
+        }if(Integer.valueOf(hora) >=0 && Integer.valueOf(hora)<=9){
+            hora = "0"+ hora;
+        }if(Integer.valueOf(minutos) >=0 && Integer.valueOf(minutos)<=9){
+            minutos = "0" +minutos;
+        }if(Integer.valueOf(segundos) >=0 && Integer.valueOf(segundos)<=9){
+            segundos = "0" +segundos;
+        }
+
+    
+        String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + hora + ":" + minutos + ":" + segundos;
         Paragraph fecha1 = new Paragraph();
-        
+
         fecha1.add(fechaGenerada);
         fecha1.setSpacingAfter(20f);
         pdf.add(fecha1);
-        
-        PdfPTable tabla = new PdfPTable(1);
+
         Font colorBlanco = new Font();
         colorBlanco.setColor(Color.white);
-        PdfPCell cell = new PdfPCell(new Phrase("some clever text", colorBlanco)); 
-        cell.setHorizontalAlignment(1);
-        
-       
-        Color myColor = WebColors.getRGBColor("#5a01b7"); 
-        cell.setBackgroundColor(myColor); 
-        tabla.addCell(cell);
-        
+        Color colorAzul = WebColors.getRGBColor("#5a01b7");
+
         PdfPTable tabla2 = new PdfPTable(8);
-        PdfPCell cell1 = new PdfPCell(new Phrase("some clever text", colorBlanco));
-        PdfPCell cell2 = new PdfPCell(new Phrase("Descuentos"));
-        PdfPCell cell3= new PdfPCell(new Phrase("some clever text", colorBlanco));
-        PdfPCell cell4 = new PdfPCell(new Phrase("some clever text", colorBlanco));
-        PdfPCell cell5 = new PdfPCell(new Phrase("Descuentos", colorBlanco));
-        PdfPCell cell6 = new PdfPCell(new Phrase("some clever text", colorBlanco));
-        PdfPCell cell7 = new PdfPCell(new Phrase("some clever text", colorBlanco));
-        PdfPCell cell8 = new PdfPCell(new Phrase("some clever text", colorBlanco));
+        PdfPCell cell1 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell2 = new PdfPCell(new Phrase("Descuentos", colorBlanco));
+        PdfPCell cell3 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell4 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell5 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell6 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell7 = new PdfPCell(new Phrase("", colorBlanco));
+        PdfPCell cell8 = new PdfPCell(new Phrase("", colorBlanco));
+        cell2.setBackgroundColor(colorAzul);
         cell2.setColspan(3);
         cell2.setPaddingLeft(90);
         cell1.setColspan(4);
+        cell1.setBackgroundColor(colorAzul);
+        cell3.setBackgroundColor(colorAzul);
         tabla2.addCell(cell1);
         tabla2.addCell(cell2);
         tabla2.addCell(cell3);
@@ -142,14 +156,22 @@ public class Reporte implements Serializable {
         tabla2.addCell(cell6);
         tabla2.addCell(cell7);
         tabla2.addCell(cell8);
-        
-        
-        
-        tabla.setSpacingAfter(20f);
-        pdf.add(tabla);
-        pdf.add(tabla2);
-        
-        
 
+        pdf.add(tabla2);
+
+    }
+
+    public void postProcessXLS(Object document) {
+        HSSFWorkbook wb = (HSSFWorkbook) document;
+        HSSFSheet sheet = wb.getSheetAt(0);
+        CellStyle style = wb.createCellStyle();
+        style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+ 
+        for (org.apache.poi.ss.usermodel.Row row : sheet) {
+            for (org.apache.poi.ss.usermodel.Cell cell : row) {
+                cell.setCellValue(cell.getStringCellValue().toUpperCase());
+                cell.setCellStyle(style);
+            }
+        }
     }
 }
