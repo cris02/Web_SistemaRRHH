@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <meta charset="utf-8" />
@@ -71,9 +73,9 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                     
-                                            <a class="nav-link" href="actualizacionsalario.bitlab">Actualización de salario mensual</a>
-                                            <a class="nav-link" href="pagos.bitlab">Visualización de pagos generados</a>
+
+                                    <a class="nav-link" href="actualizacionsalario.bitlab">Actualización de salario mensual</a>
+                                    <a class="nav-link" href="pagos.bitlab">Visualización de pagos generados</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
@@ -103,13 +105,90 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+
+
+
+
+
+
+                                <h:form>
+                                    <div style="float:right;padding-top: 5px;">
+                                        <p:commandButton value="Exportar en PDF" ajax="false" >
+                                            <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
+                                            <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="cars"
+                                                            preProcessor="#{reporte.preProcessPDF}"            />
+                                        </p:commandButton>
+
+                                        <p:commandButton value="Exportar en Excel" ajax="false">
+                                            <p:dataExporter type="csv" target="tbl" fileName="cars" />
+                                        </p:commandButton>    
+                                    </div>
+                                    
+                                    <p:dataTable id="tbl" var="detalle" value="#{detallePlanillaManejador.entidadLista}"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                                 paginator="true" rows="10" style="margin-bottom:20px">
+
+                                            
+                                        <p:column sortBy="#{detalle.contIdPk.empIdFk.empNombres}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Nombre Empleado" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}"/>
+                                        </p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Cargo" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}"/>
+                                        </p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.contDiasLaborados}" style="width: 6%">
+                                            <f:facet name="header">
+                                                <h:outputText value="Dias Trab" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.contDiasLaborados}"/>
+                                        </p:column>
+                                        <p:column sortBy="#{detalle.contIdPk.contSalario}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Sueldo Base" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.contIdPk.contSalario}"/>
+                                        </p:column>
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaIsss}">
+                                            <f:facet name="header">
+                                                <h:outputText value="ISSS"/>
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.dplaIsss}" />
+                                        </p:column>
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaAfp}">
+                                            <f:facet name="header">
+                                                <h:outputText value="AFP"/>
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.dplaAfp}" />
+                                        </p:column>
+
+                                        <p:column style="width: 10%" sortBy="#{detalle.dplaImpRenta}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Renta" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.dplaImpRenta}" />
+                                        </p:column>
+
+                                        <p:column sortBy="#{detalle.dplaTotPagar}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Total a Pagar" />
+                                            </f:facet>
+                                            <h:outputText value="#{detalle.dplaTotPagar}" />
+                                        </p:column>
+                                    </p:dataTable>
+
+
+
+                                </h:form>
+
+
+
+
+
                             </div>
                         </div>
                         <div style="height: 100vh;"></div>
