@@ -5,10 +5,10 @@
         <group>
             <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/web/admin.xhtml</file>
             <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/web/admin/departamentos.xhtml</file>
-            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/src/java/com/bitlab/manejadores/DepartamentoManejador.java</file>
-            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/src/java/com/bitlab/manejadores/ManejadorAbstracto.java</file>
+            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/web/admin/roles.xhtml</file>
+            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/src/java/com/bitlab/manejadores/EmpleadoManejador.java</file>
+            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/src/java/com/bitlab/controladores/EmpleadoControlador.java</file>
             <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/web/plantillaPrincipal.xhtml</file>
-            <file>file:/C:/Users/crist/OneDrive/Documents/NetBeansProjects/Modulo%20Avanzado%20Bitlab/Web_SistemaRRHH/web/admin/estados.xhtml</file>
         </group>
     </open-files>
 </project-private>
