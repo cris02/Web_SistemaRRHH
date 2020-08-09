@@ -58,7 +58,7 @@ public class InicioSesionManejador implements Serializable {
             Logger.getLogger(InicioSesionManejador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }

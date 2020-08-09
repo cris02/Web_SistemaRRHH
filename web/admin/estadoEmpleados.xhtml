@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gestionar Estado</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets<!--Estilos CSS-->
+        <style type="text/css">
+            .ui-g div {
+                text-align: right;
+            }
+        </style>
+
+        <h1>Gestionar Estado del Empleado</h1>
+
+        <p:growl id="messages" globalOnly="true" showDetail="true" />
+        <p:messages id="messagesAll" />
+
+        <!--formulario usuario-->
+        <h:form id="formStatusEmpleado">
+            <p:dataTable var="emp" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
+                <p:column headerText="Id Empleado" style="text-align: center " sortBy="#{emp.empIdPk}" filterBy="#{emp.empIdPk}" filterMatchMode="contains" >
+                    <h:outputText value="#{emp.empIdPk}" />
+                </p:column>
+                <p:column headerText="Nombre" sortBy="#{emp.empNombres}" filterBy="#{emp.empNombres}" filterMatchMode="contains">
+                    <h:outputText value="#{emp.empNombres}" />
+                </p:column>
+                <p:column headerText="Apellidos" sortBy="#{emp.empApellidos}" filterBy="#{emp.empApellidos}" filterMatchMode="contains">
+                    <h:outputText value="#{emp.empApellidos}" />
+                </p:column>
+                <p:column headerText="Documento" style="text-align: center " sortBy="#{emp.empDocumento}" filterBy="#{emp.empDocumento}" filterMatchMode="contains">
+                    <h:outputText value="#{emp.empDocumento}" />
+                </p:column>
+                <p:column headerText="Correo Electronico" sortBy="#{emp.empCorreo}" filterBy="#{emp.empCorreo}" filterMatchMode="contains">
+                    <h:outputText value="#{emp.empCorreo}" />
+                </p:column>
+                <p:column headerText="Estado" sortBy="#{emp.empEstado}" style="width:6%;">
+                    <p:inputSwitch value="#{emp.empEstado}" onLabel="Activo" offLabel="Inactivo">
+                        <p:ajax listener="#{empleadoManejador.cambiarEstado(emp)}" process="@this" update=":messages :messagesAll :formStatusEmpleado" />
+                    </p:inputSwitch>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
+

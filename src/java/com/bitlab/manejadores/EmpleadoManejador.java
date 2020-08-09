@@ -67,12 +67,13 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     }
 
     
+    //metodo para cambiar el estado del empelado
     public void cambiarEstado(Empleado empleado) {
         setEntidadSeleccionada(empleado);
         this.selectEstado = getEntidadSeleccionada().getEmpEstado();
         getEntidadSeleccionada().setEmpEstado(selectEstado);
         super.guardarEntidad();
-        String estado = this.getEntidadSeleccionada().getEmpEstado() ? "true" : "false";
+        String estado = this.getEntidadSeleccionada().getEmpEstado() ? "Activo" : "Inactivo";
         Utilidades.lanzarMensajeInfo("Estado cambiado ", "Estado cambiado a " +estado);
     }
     
