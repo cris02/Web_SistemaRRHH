@@ -79,12 +79,12 @@ public class Departamento implements Serializable {
         this.deptIdPk = deptIdPk;
     }
 
-    public Departamento(String deptNombre, String deptDescripcion, BigDecimal deptPresupuesto, short deptVacantesRequeridas, Short deptVacanteDisponible) {
+    public Departamento(Integer deptIdPk, String deptNombre, BigDecimal deptPresupuesto, short deptVacantesRequeridas, boolean deptEstado) {
+        this.deptIdPk = deptIdPk;
         this.deptNombre = deptNombre;
-        this.deptDescripcion = deptDescripcion;
         this.deptPresupuesto = deptPresupuesto;
         this.deptVacantesRequeridas = deptVacantesRequeridas;
-        this.deptVacanteDisponible = deptVacanteDisponible;
+        this.deptEstado = deptEstado;
     }
 
     public Integer getDeptIdPk() {

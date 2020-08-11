@@ -38,7 +38,7 @@ public abstract class FabricaControladorAbstracto<T> {
             //regresar al estado original si ha ocurrido algun problema
             em.getTransaction().rollback();
             throw new Exception(e);
-        }finally {
+        } finally {
             if (em.isOpen()) {
                 em.close();
             }
@@ -55,9 +55,7 @@ public abstract class FabricaControladorAbstracto<T> {
             for (T entidad : entidades) {
                 em.persist(entidad);
             }
-            System.out.println("Empezando el comit");
             em.getTransaction().commit();
-            System.out.println("Transaccion realizada correctamente");
 
         } catch (Exception e) {
             //regresar al estado original si ha ocurrido algun problema
@@ -74,15 +72,11 @@ public abstract class FabricaControladorAbstracto<T> {
     public void editar(T entidad) throws Exception {
         EntityManager em = obtenerManejadorEntidades();
         try {
-            //iniciar la transaccion
-//            if(!em.getTransaction().isActive()){
-                em.getTransaction().begin();
-                em.merge(entidad);
-                em.getTransaction().commit();
-//            }
+            em.getTransaction().begin();
+            em.merge(entidad);
+            em.getTransaction().commit();
         } catch (Exception e) {
             //regresar al estado original si ha ocurrido algun problema
-            System.out.println("ERORRRRRR " +e.getMessage());
             em.getTransaction().rollback();
             throw new Exception(e);
         } finally {
@@ -117,7 +111,7 @@ public abstract class FabricaControladorAbstracto<T> {
         EntityManager em = obtenerManejadorEntidades();
         try {
             return em.find(entityClass, id); //retorna la entidad instanciada
-            
+
         } catch (Exception e) {
             //posible error en la busqueda
             throw new Exception(e);
@@ -148,7 +142,7 @@ public abstract class FabricaControladorAbstracto<T> {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
-           return q.getResultList();           
+            return q.getResultList();
         } finally {
             em.close();
         }
@@ -156,17 +150,5 @@ public abstract class FabricaControladorAbstracto<T> {
 
     //metodo para obtener la instancia del manejador de entidades
     protected abstract EntityManager obtenerManejadorEntidades();
-    
-    public List<Empleado> encontrarEmpleadoEstado(Boolean estado) {
-        EntityManager em = obtenerManejadorEntidades();
-        try {
-            Query q = em.createQuery("SELECT e FROM Empleado e WHERE e.empEstado = :estado"); //codigo en jpql
-            q.setParameter("estado", estado);
-            return q.getResultList();
-        } finally {
-           if (em.isOpen()) {
-                em.close();
-            }
-        }
-    }
+
 }

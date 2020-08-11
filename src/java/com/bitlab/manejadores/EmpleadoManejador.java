@@ -12,6 +12,7 @@ import com.bitlab.controladores.RolControlador;
 import com.bitlab.entidades.Departamento;
 import com.bitlab.entidades.Empleado;
 import com.bitlab.entidades.Rol;
+import com.bitlab.utilidades.Utilidades;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -67,9 +68,14 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     //metodo para cambiar el estado del empelado
     public void cambiarEstado(Empleado empleado) {
         setEntidadSeleccionada(empleado);
-        this.selectEstado = getEntidadSeleccionada().getEmpEstado();
+        this.selectEstado = getEntidadSeleccionada().getEmpEstado(); // se obtiene el estado del input
         getEntidadSeleccionada().setEmpEstado(selectEstado);
-        super.guardarEntidad();
+        if (getEntidadSeleccionada().getEmpEstado() == selectEstado) {
+            super.guardarEntidad();
+        } else {
+            Utilidades.lanzarMensajeError("Error al procesar Estado ", "Estado no modificado");
+        }
+        
     }
 
     @Override

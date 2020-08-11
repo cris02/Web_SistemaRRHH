@@ -46,48 +46,41 @@ public class UsuarioManejador extends ManejadorAbstracto<Usuario> {
     //metodo re-estructurado para guardar o modificar un suario
     @Override
     public void guardarEntidad() {
+        rol = getEntidadSeleccionada().getRolIdFk();
+        getEntidadSeleccionada().setRolIdFk(rol); // cuando el rol viene del formulario
 
-        try {
-            rol = getEntidadSeleccionada().getRolIdFk();
-            getEntidadSeleccionada().setRolIdFk(rol); // cuando el rol viene del formulario
-            
-//            usuario = usuarioControlador.encontrar(getEntidadSeleccionada().getUsuIdPk());
-//            pass = usuario.getUsuContrasena();
-            //System.out.println("Contra de la bas de datos" + pass);
-            
-            if (getEntidadSeleccionada().getUsuIdPk() != null) {
-                //la entidad ya existe: actualiza los datos
-                try {
-                    usuario = usuarioControlador.encontrar(getEntidadSeleccionada().getUsuIdPk());
-                    pass = usuario.getUsuContrasena();
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(UsuarioManejador.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                //es una nueva entidad: se asigna propiedades a la nueva entidad
-                pass = "";
-                getEntidadSeleccionada().setUsuEstatus(true);
-                getEntidadSeleccionada().setUsuFechaCreacion(new Date());
-                getEntidadSeleccionada().setUsuFechaConexion(new Date());
-                
+        System.out.println("id de la entidad: " + getEntidadSeleccionada().getUsuIdPk());
+        if (getEntidadSeleccionada().getUsuIdPk() != null) {
+            //la entidad ya existe: actualiza los datos
+            try {
+                usuario = usuarioControlador.encontrar(getEntidadSeleccionada().getUsuIdPk());
+                pass = usuario.getUsuContrasena();
+
+            } catch (Exception ex) {
+                Logger.getLogger(UsuarioManejador.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            String contra = getEntidadSeleccionada().getUsuContrasena(); //contrasena obtenida del formulario
-            //verifica si la contrasena del input del formulario esta vacia
-            if (contra.isEmpty()) {
-                getEntidadSeleccionada().setUsuContrasena(pass);
-            } else if (!(getEntidadSeleccionada().getUsuContrasena().equals(pass))) {
-                EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
-                getEntidadSeleccionada().setUsuContrasena(encriptacionTexto.getTextoEncriptado(contra));
-            }
-            
-            super.guardarEntidad(); //guardar la entidad
-        } catch (Exception ex) {
-            Logger.getLogger(UsuarioManejador.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            //es una nueva entidad: se asigna propiedades a la nueva entidad
+            pass = "";
+            getEntidadSeleccionada().setUsuEstatus(true);
+            getEntidadSeleccionada().setUsuFechaCreacion(new Date());
+            getEntidadSeleccionada().setUsuFechaConexion(new Date());
+
         }
-    }
 
+        String contra = getEntidadSeleccionada().getUsuContrasena(); //contrasena obtenida del formulario
+        //verifica si la contrasena del input del formulario esta vacia
+        if (contra.isEmpty()) {
+            getEntidadSeleccionada().setUsuContrasena(pass);
+        } else if (!(getEntidadSeleccionada().getUsuContrasena().equals(pass))) {
+            EncriptacionTexto encriptacionTexto = new EncriptacionTexto();
+            getEntidadSeleccionada().setUsuContrasena(encriptacionTexto.getTextoEncriptado(contra));
+        }
+
+        super.guardarEntidad(); //guardar la entidad
+
+    }
+    
     //metodo para obtener el controlador de la entidad
     @Override
     public UsuarioControlador obtenerControlador() {

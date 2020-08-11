@@ -84,26 +84,27 @@
                                     <h:outputText value="Dirección " />
                                     <p:inputText value="#{empleadoManejador.entidadSeleccionada.empDireccion}"/>
                                     <h:outputText value="Rol"/>
-                                    <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada.rolIdFk}" >
+                                    <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada.rolIdFk}" converter="rolConverter" >
                                         <f:selectItems value="#{empleadoManejador.rolLista}" var="roles" itemLabel="#{roles.rolNombrerol}" itemValue="#{roles}">
                                         </f:selectItems>
                                     </p:selectOneMenu>
 
                                     <h:outputText value="Departamento" />
-                                    <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada.deptIdFk}" >
+                                    <p:selectOneMenu value="#{empleadoManejador.entidadSeleccionada.deptIdFk}" converter="departamentoConvertidor" >
                                         <f:selectItems value="#{empleadoManejador.departamentoLista}" var="departamentos" itemLabel="#{departamentos.deptNombre}" itemValue="#{departamentos}">
                                         </f:selectItems>
                                     </p:selectOneMenu>
 
                                 </p:panelGrid>
                                 <p:panelGrid>
-                                    div class="ui-g badge-light">
-                                    <div class="ui-md-12">
-                                        <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}"  update=":messages :formEmpleados :messagesAll" 
-                                                         onsuccess="PF('empleadoDialog').hide()" />
-                                        <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" update=":messages :formEmpleados :messagesAll" 
-                                                         onsuccess="PF('empleadoDialog').hide()"/>
-                                        <p:commandButton value="Cancelar" onsuccess="PF('empleadoDialog').hide()" />
+                                    <div class="ui-g badge-light">
+                                        <div class="ui-md-12">
+                                            <p:commandButton value="Guardar" actionListener="#{empleadoManejador.guardarEntidad()}"  update=":messages :formEmpleados :messagesAll" 
+                                                             onsuccess="PF('empleadoDialog').hide()" />
+                                            <p:commandButton value="Eliminar" actionListener="#{empleadoManejador.eliminarEntidad()}" update=":messages :formEmpleados :messagesAll" 
+                                                             onsuccess="PF('empleadoDialog').hide()"/>
+                                            <p:commandButton value="Cancelar" onsuccess="PF('empleadoDialog').hide()" />
+                                        </div>
                                     </div>
                                 </p:panelGrid>
                             </p:dialog>

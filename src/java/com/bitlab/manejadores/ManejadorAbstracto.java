@@ -19,7 +19,8 @@ public abstract class ManejadorAbstracto<T>{
     private T entidadSeleccionada;
     private List<T> entidadLista;
     private final Class<T> claseEntidad;
-    private boolean esNuevaEntidad;
+    private boolean esNuevaEntidad; //variable pivote para renderizar
+    private static Logger log = Logger.getLogger(ManejadorAbstracto.class.getName());
     
     //metodo que retorna la instancia de la entidad
     public ManejadorAbstracto(Class<T> entidad){
@@ -29,7 +30,6 @@ public abstract class ManejadorAbstracto<T>{
     @PostConstruct //metodo que se carga cuando se crea la instancia del manejador abstracto
     public void cargarInformacion(){
         entidadLista = obtenerControlador().encontrarEntidades();
-        nuevaEntidad(); //CAMBIADO
     }
     
     @PreDestroy // metodo para eliminar las instancia la finalizar el ScopeView
@@ -41,27 +41,27 @@ public abstract class ManejadorAbstracto<T>{
     //metodo para instanciar la entidad seleccionada
     public void nuevaEntidad(){
         try {
-            System.out.println("Ingresando una nueva entidad");
+            log.info("Ingresando una nueva entidad");
             entidadSeleccionada = claseEntidad.getDeclaredConstructor().newInstance();
             setEsNuevaEntidad(true);
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exito", claseEntidad.getSimpleName() +" ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exito!!", claseEntidad.getSimpleName() +" ha sido guardado...");
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error", claseEntidad.getSimpleName() +" no ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error!!", claseEntidad.getSimpleName() +" no ha sido guardado...");
         }
     }
     
     //metodo para actualizar la entidad
     public void guardarEntidad(){
         try {
-            System.out.println("Ingresando a guardar " +claseEntidad.getSimpleName()); 
+            log.info("Ingresando a guardar - " + claseEntidad.getSimpleName()); 
             obtenerControlador().editar(entidadSeleccionada);
             
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exito!!", claseEntidad.getSimpleName() +" ha sido guardado...");
             cargarInformacion();
         } catch (Exception ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error", claseEntidad.getSimpleName() +" no ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error!!", claseEntidad.getSimpleName() +" no ha sido guardado...");
             
         }
     }
@@ -69,7 +69,7 @@ public abstract class ManejadorAbstracto<T>{
     //metodo para eliminar la entidad
     public void eliminarEntidad(){
         try {
-            System.out.println("Ingresando a eliminar " +claseEntidad.getSimpleName());
+            log.info("Ingresando a eliminar - " +claseEntidad.getSimpleName());
             obtenerControlador().destruir(entidadSeleccionada);
             cargarInformacion();
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido eliminado...");
@@ -82,7 +82,7 @@ public abstract class ManejadorAbstracto<T>{
         metodos Getter y Setter
     */
     public T getEntidadSeleccionada() {
-        System.out.println("ENTIDAD SELECCIONADA" + entidadSeleccionada);
+        log.info("Entidad seleccionada para operar - " + entidadSeleccionada);
         return entidadSeleccionada;
     }
 

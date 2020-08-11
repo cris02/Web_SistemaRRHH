@@ -47,18 +47,18 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "USU_ID_PK", nullable = false)
     private Integer usuIdPk;
-    @Size(max = 20)
-    @Column(name = "USU_NOMBRE", length = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 60)
+    @Column(name = "USU_NOMBRE", nullable = false, length = 60)
     private String usuNombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "USU_CORREO", nullable = false, length = 50)
     private String usuCorreo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "USU_CONTRASENA", nullable = false, length = 30)
+    @Size(max = 70)
+    @Column(name = "USU_CONTRASENA", length = 70)
     private String usuContrasena;
     @Basic(optional = false)
     @NotNull
@@ -81,10 +81,10 @@ public class Usuario implements Serializable {
         this.usuIdPk = usuIdPk;
     }
 
-    public Usuario(Integer usuIdPk, String usuCorreo, String usuContrasena, boolean usuEstatus) {
+    public Usuario(Integer usuIdPk, String usuNombre, String usuCorreo, boolean usuEstatus) {
         this.usuIdPk = usuIdPk;
+        this.usuNombre = usuNombre;
         this.usuCorreo = usuCorreo;
-        this.usuContrasena = usuContrasena;
         this.usuEstatus = usuEstatus;
     }
 

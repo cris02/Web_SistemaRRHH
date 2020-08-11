@@ -18,7 +18,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author henry
  */
-@FacesConverter(forClass = Departamento.class)
+@FacesConverter("departamentoConvertidor")
 public class DepartamentoConvertidor implements Converter{
 
     @Override

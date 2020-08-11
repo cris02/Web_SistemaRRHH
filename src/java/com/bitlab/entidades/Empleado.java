@@ -120,19 +120,6 @@ public class Empleado implements Serializable {
         this.empEstado = empEstado;
     }
 
-    public Empleado(String empNombres, String empApellidos, String empDocumento, Date empFechaNacimiento, String empCorreo, String empNif, Rol rolIdFk, Departamento deptIdFk) {
-        this.empNombres = empNombres;
-        this.empApellidos = empApellidos;
-        this.empDocumento = empDocumento;
-        this.empFechaNacimiento = empFechaNacimiento;
-        this.empCorreo = empCorreo;
-        this.empNif = empNif;
-        this.rolIdFk = rolIdFk;
-        this.deptIdFk = deptIdFk;
-    }
-    
-    
-
     public Integer getEmpIdPk() {
         return empIdPk;
     }
