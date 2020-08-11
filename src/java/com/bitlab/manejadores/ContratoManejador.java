@@ -8,11 +8,7 @@ package com.bitlab.manejadores;
 import com.bitlab.controladores.ContratoControlador;
 import com.bitlab.controladores.FabricaControladorAbstracto;
 import com.bitlab.entidades.Contrato;
-import java.io.Serializable;
-import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 
 /**

@@ -51,7 +51,7 @@
                                     </p:column>
                                     <p:column headerText="Estado" sortBy="#{emp.empEstado}" style="width:9%;">
                                         <p:inputSwitch value="#{emp.empEstado}" onLabel="Activo" offLabel="Inactivo">
-                                            <p:ajax listener="#{empleadoManejador.obtenerEstado(emp)}" process="@this" update=":messages :messagesAll :formStatusEmpleado" />
+                                            <p:ajax listener="#{empleadoManejador.cambiarEstado(emp)}" process="@this" update=":messages :messagesAll :formStatusEmpleado" />
                                         </p:inputSwitch>
                                     </p:column>
                                 </p:dataTable>

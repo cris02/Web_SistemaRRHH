@@ -107,9 +107,5 @@ public abstract class ManejadorAbstracto<T>{
     }
 
     
-    
-    
-    
-    
     public abstract FabricaControladorAbstracto<T> obtenerControlador();
 }

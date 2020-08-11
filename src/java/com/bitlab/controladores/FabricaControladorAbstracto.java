@@ -148,11 +148,7 @@ public abstract class FabricaControladorAbstracto<T> {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
             }
-            List<T> entidades = q.getResultList();
-            for(T e: entidades){
-                em.refresh(e);
-            }
-            return entidades;
+           return q.getResultList();           
         } finally {
             em.close();
         }

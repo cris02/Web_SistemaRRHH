@@ -20,15 +20,27 @@ import javax.faces.bean.ViewScoped;
 public class DeptoManejador extends ManejadorAbstracto<Departamento>{
     
     private DepartamentoControlador departamentoControlador;
+    private int numeroDepartamentos;
 
     public DeptoManejador() {
         super(Departamento.class);
         departamentoControlador = new DepartamentoControlador();
+        numeroDepartamentos = departamentoControlador.encontrarEntidades().size();
     }
 
     @Override
     public DepartamentoControlador obtenerControlador() {
         return departamentoControlador;
     }
+
+    public int getNumeroDepartamentos() {
+        return numeroDepartamentos;
+    }
+
+    public void setNumeroDepartamentos(int numeroDepartamentos) {
+        this.numeroDepartamentos = numeroDepartamentos;
+    }
+    
+    
     
 }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Sistema RRHH-BitLab</title>
         <meta charset="utf-8" />
@@ -13,19 +14,20 @@
         <h:outputStylesheet name="css/styles.css" />
     </h:head>
     <h:body>
-        
+
+
         <!-- Regla de estilo CSS -->
         <style type="text/css">
             body .ui-staticmessage.ui-message {
                 width: 100%;
             }
         </style>
-        
-        <c:set var="root" value="#{request.contextPath}/" />
+
+        <c:set var="root" value="#{request.contextPath}" />
 
         <!--  inicio del Navbar-->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="../index.bitlab">RH-BITLAB</a>
+            <a class="navbar-brand" href="../plantillaPrincipal.bitlab">RH-BITLAB</a>
 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -59,9 +61,14 @@
 
                     <!--Inicio de sidebar Menu-->
                     <div class="sb-sidenav-menu">
-                        <!--menu dinamico-->
-                        <ui:insert name="menuAdmin"></ui:insert>
-                        <ui:insert name="menuRH"></ui:insert>
+
+                        <!--menu dinamico--> 
+                        <ui:insert name="menuAdmin">
+                            <ui:include src="admin.xhtml" /> 
+                        </ui:insert>
+                        <ui:insert name="menuRH">
+                            <ui:include src="rrhh.xhtml" /> 
+                        </ui:insert>
 
                     </div>
                     <!--Inicio de sidebar Menu-->
@@ -96,7 +103,7 @@
 
                         <div id="content">
                             <ui:insert name="content" >
-
+                                <ui:include src="panelRH.xhtml" />
                             </ui:insert>
                         </div>
 

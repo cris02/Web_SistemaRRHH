@@ -6,69 +6,32 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
+        <!--menu de RRHH-->
+<!--        <ui:composition template="./plantillaPrincipal.xhtml">
+            <ui:define name="menuAdmin">-->
 
-        <ui:composition template="./plantillaPrincipal.xhtml">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">MODULO RECURSOS HUMANOS</div>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Administracion
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <h:link class="nav-link" outcome="/rrhh/actualizacion" value="Actualización de Empleados" />
 
-            <ui:define name="menuRH">
-                menuRH
-            </ui:define>
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargarndo..." />
+                            </p:dialog>
+                        </nav>
+                    </div>
+                </div>
+                <!--menu de admin-->
 
-            <ui:define name="dashboard-rrhh">
-                <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">
-                                        <p>Empleados Activos</p>
-                                        <h3>
-                                            <h:outputLabel value="#{empleadoManejador.numeroEmpleados}"/>
-                                        </h3>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">
-                                        <p>Departamentos en Bitlab</p>
-                                        <h3>
-                                            <h:outputLabel value=""/>
-                                        </h3>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            </ui:define>
-
-        </ui:composition>
+<!--            </ui:define>
+        </ui:composition>-->
 
     </body>
 </html>

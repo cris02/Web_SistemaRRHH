@@ -5,7 +5,6 @@
  */
 package com.bitlab.manejadores;
 
-import com.bitlab.controladores.FabricaControladorAbstracto;
 import com.bitlab.controladores.RolControlador;
 import com.bitlab.entidades.Rol;
 import javax.faces.bean.ManagedBean;

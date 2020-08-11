@@ -4,22 +4,15 @@
  * and open the template in the editor.
  */
 package com.bitlab.utilidades;
-
-import com.bitlab.controladores.PlanillaControlador;
-import com.bitlab.manejadores.DetallePlanillaManejador;
 import com.lowagie.text.BadElementException;
-import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
-import com.lowagie.text.HeaderFooter;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.Row;
 import com.lowagie.text.html.WebColors;
-import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.awt.Color;
@@ -27,9 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -38,7 +29,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
-
 /**
  *
  * @author henry
@@ -46,14 +36,12 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 @Named("reporte")
 @SessionScoped
 public class Reporte implements Serializable {
-
     public void preProcessPDF(Object document) throws BadElementException, IOException, DocumentException {
+        //Instancia de la clase Document
         Document pdf = (Document) document;
-
-        //seta a margin e página, precisa estar antes da abertura do documento, ou seja da linha: pdf.open()
+        //Configura un margen de pagina, y por ultimo se necesita abrir el documento con pdf.open
         pdf.setMargins(10f, 10f, 10f, 10f);
         pdf.setPageSize(PageSize.A4.rotate());
-
         pdf.addTitle("Título here brother");
         pdf.addCreationDate();
         pdf.addAuthor("Henry Callejas");
@@ -61,46 +49,34 @@ public class Reporte implements Serializable {
         pdf.addSubject("Titulo");
         pdf.addTitle("Titulo");
         pdf.getPageNumber();
-
         pdf.open();
-
-        //aqui pega o contexto para formar a url da imagem
+        //Obtengo el contexto para crear la imagen dentro del documento
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String logo = servletContext.getRealPath("") + File.separator + "/dist/assets/img" + File.separator + "logo.png";
-
-        //cria a imagem e passando a url
+        //Creo la imagen pasando como parametro el path de la imagen
         Image image = Image.getInstance(logo);
-
-//        image.scalePercent(11);
+//        Escalo la imagen
         image.scalePercent(12, 8.7f);
         image.setAbsolutePosition(0, PageSize.A4.rotate().getHeight() - image.getScaledHeight());
-
-        //alinha ao centro
+        //Alineacion al centro
         image.setAlignment(Image.ALIGN_CENTER);
-
-        //adciona a img ao pdf
+        //Agrego la imagen al documento pdf
         pdf.add(image);
-
+        //Creo una fuente y le configuro un tamano de texto
         Font fuente = new Font();
         fuente.setSize(20);
-        //adiciona um paragrafo ao pdf, alinha também ao centro
-        Paragraph p1 = new Paragraph(" ", fuente);
-        p1.setExtraParagraphSpace(10);
-        Paragraph p = new Paragraph("Planilla de Pagos Bitlab", fuente);
-        Paragraph p2 = new Paragraph(" ", fuente);
-        p.setFont(new Font(Font.BOLD));
-//        p.setExtraParagraphSpace(40);
-        p.setAlignment(1);
-        p.setSpacingBefore(50);
-//        p.setAlignment("center");
+        //Agrego un parrafo al pdf y lo alineo al centro
+        Paragraph p1 = new Paragraph("Planilla de Pagos Bitlab", fuente);
+        p1.setFont(new Font(Font.BOLD));
+        p1.setAlignment(1);
+        p1.setSpacingBefore(100);
         pdf.add(p1);
-        pdf.add(p);
-        pdf.add(p2);
-
-        Paragraph abajo = new Paragraph("Persona encargada: Henry Callejas");
+        Paragraph abajo = new Paragraph("Persona encargada: Mario Lopez");
+        abajo.setAlignment(2);
+        abajo.setSpacingBefore(40);
         abajo.setSpacingAfter(10f);
         pdf.add(abajo);
-
+        //Configuracion de fecha de creacion de cada documento a la fecha actual
         Calendar greg = new GregorianCalendar();
         String dia = Integer.toString(greg.get(Calendar.DAY_OF_MONTH));
         String mes = Integer.toString(greg.get(Calendar.MONTH) + 1);
@@ -108,7 +84,6 @@ public class Reporte implements Serializable {
         String hora = Integer.toString(greg.get(Calendar.HOUR));
         String minutos = Integer.toString(greg.get(Calendar.MINUTE));
         String segundos = Integer.toString(greg.get(Calendar.SECOND));
-        
         if(Integer.valueOf(dia) >=1 && Integer.valueOf(dia)<=9){
             dia = "0" +dia;
         }if(Integer.valueOf(mes) >=1 && Integer.valueOf(mes)<=9){
@@ -120,19 +95,16 @@ public class Reporte implements Serializable {
         }if(Integer.valueOf(segundos) >=0 && Integer.valueOf(segundos)<=9){
             segundos = "0" +segundos;
         }
-
-    
         String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + hora + ":" + minutos + ":" + segundos;
         Paragraph fecha1 = new Paragraph();
-
+        fecha1.setAlignment(2);
         fecha1.add(fechaGenerada);
         fecha1.setSpacingAfter(20f);
         pdf.add(fecha1);
-
         Font colorBlanco = new Font();
         colorBlanco.setColor(Color.white);
-        Color colorAzul = WebColors.getRGBColor("#5a01b7");
-
+        Color colorAzul = WebColors.getRGBColor("#00DB53");
+        //Creacion de una tabla
         PdfPTable tabla2 = new PdfPTable(8);
         PdfPCell cell1 = new PdfPCell(new Phrase("", colorBlanco));
         PdfPCell cell2 = new PdfPCell(new Phrase("Descuentos", colorBlanco));
@@ -156,17 +128,14 @@ public class Reporte implements Serializable {
         tabla2.addCell(cell6);
         tabla2.addCell(cell7);
         tabla2.addCell(cell8);
-
         pdf.add(tabla2);
-
     }
-
+    //Metodo para procesar documento XLS
     public void postProcessXLS(Object document) {
         HSSFWorkbook wb = (HSSFWorkbook) document;
         HSSFSheet sheet = wb.getSheetAt(0);
         CellStyle style = wb.createCellStyle();
         style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
- 
         for (org.apache.poi.ss.usermodel.Row row : sheet) {
             for (org.apache.poi.ss.usermodel.Cell cell : row) {
                 cell.setCellValue(cell.getStringCellValue().toUpperCase());

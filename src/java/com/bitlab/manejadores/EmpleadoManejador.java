@@ -12,7 +12,6 @@ import com.bitlab.controladores.RolControlador;
 import com.bitlab.entidades.Departamento;
 import com.bitlab.entidades.Empleado;
 import com.bitlab.entidades.Rol;
-import com.bitlab.utilidades.Utilidades;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -36,7 +35,6 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     private boolean selectEstado;
     private String numeroEmpleados;
     private String numeroEmpleadosInactivos;
-    private int inactivos;
 
     public EmpleadoManejador() {
         super(Empleado.class);
@@ -47,6 +45,7 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
         departamentoLista = deptControlador.encontrarEntidades();
         listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
         numeroEmpleados = String.valueOf(listaEmpleados.size());
+        numeroEmpleadosInactivos = String.valueOf(empleadoControlado.encontrarEmpleadoEstado(false).size());
     }
 
     public String getNumeroEmpleadosInactivos() {
@@ -56,7 +55,6 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     public void setNumeroEmpleadosInactivos(String numeroEmpleadosInactivos) {
         this.numeroEmpleadosInactivos = numeroEmpleadosInactivos;
     }
-    
 
     public String getNumeroEmpleados() {
         return numeroEmpleados;
@@ -66,21 +64,19 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
         this.numeroEmpleados = numeroEmpleados;
     }
 
-    
     //metodo para cambiar el estado del empelado
     public void cambiarEstado(Empleado empleado) {
         setEntidadSeleccionada(empleado);
         this.selectEstado = getEntidadSeleccionada().getEmpEstado();
         getEntidadSeleccionada().setEmpEstado(selectEstado);
         super.guardarEntidad();
-        String estado = this.getEntidadSeleccionada().getEmpEstado() ? "Activo" : "Inactivo";
-        Utilidades.lanzarMensajeInfo("Estado cambiado ", "Estado cambiado a " +estado);
     }
-    
+
     @Override
     public void nuevaEntidad() {
         super.nuevaEntidad(); //To change body of generated methods, choose Tools | Templates.
         getEntidadSeleccionada().setEmpEstado(true);
+        setEsNuevaEntidad(true);
     }
 
     @Override
@@ -159,7 +155,5 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
     public void setSelectEstado(boolean selectEstado) {
         this.selectEstado = selectEstado;
     }
-
-    
 
 }
