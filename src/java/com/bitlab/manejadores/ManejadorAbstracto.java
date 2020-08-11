@@ -44,7 +44,7 @@ public abstract class ManejadorAbstracto<T>{
             System.out.println("Ingresando una nueva entidad");
             entidadSeleccionada = claseEntidad.getDeclaredConstructor().newInstance();
             setEsNuevaEntidad(true);
-            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exitoso", claseEntidad.getSimpleName() +" ha sido guardado...");
+            Utilidades.lanzarMensaje(FacesMessage.SEVERITY_INFO, "Exito", claseEntidad.getSimpleName() +" ha sido guardado...");
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ManejadorAbstracto.class.getName()).log(Level.SEVERE, null, ex);
             Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Error", claseEntidad.getSimpleName() +" no ha sido guardado...");

@@ -1,78 +1,96 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Catalogo Rol</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <!--Aplicando estilos CSS-->
-        <style type="text/css">
-            .ui-g div {
-                background-color: #ededed;
-                text-align: center;
-                border: 1px solid #fafafa;
-            }
-        </style>
+        <ui:composition template="../plantillaPrincipal.xhtml">
 
-        <h1>Modulo de Administracion de Roles</h1>
+            <ui:define name="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header text-center badge-primary">
+                                <i class="fas fa-table mr-1"></i>
+                                Modulo de Administracion de Roles
+                            </div>
 
-        <p:growl id="messages" globalOnly="true" showDetail="true" />
-        <p:messages id="messagesAll" />
+                            <!--Aplicando estilos CSS-->
+                            <style type="text/css">
+                                .ui-g div {
+                                    /*background-color: #ededed;*/
+                                    text-align: center;
+                                    border: 1px solid #fafafa;
+                                }
+                            </style>
 
-        <!--Formulario de rol-->
-        <h:form id="formRol">
-            <p:dataTable var="rol" value="#{rolManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
-                <p:column headerText="Id Rol" sortBy="#{rol.rolIdPk}" filterBy="#{rol.rolIdPk}" filterMatchMode="contains">
-                    <h:outputText value="#{rol.rolIdPk}" />
-                </p:column>
-                <p:column headerText="Nomnre" sortBy="#{rol.rolNombrerol}" filterBy="#{rol.rolNombrerol}" filterMatchMode="contains">
-                    <h:outputText value="#{rol.rolNombrerol}" />
-                </p:column>
-                <p:column headerText="Descripcion" sortBy="#{rol.rolDescripcion}" filterBy="#{rol.rolDescripcion}" filterMatchMode="contains">
-                    <h:outputText value="#{rol.rolDescripcion}" />
-                </p:column>
-                <p:column headerText="OPCION" style="width:70px; align-content: center">
-                    <p:commandButton update=":formDetailRol" oncomplete="PF('detailDialog').show()" icon="pi pi-search" title="Ver">
-                        <f:setPropertyActionListener value="#{rol}" target="#{rolManejador.entidadSeleccionada}" />
-                    </p:commandButton>
-                    <p:commandButton  actionListener="#{rolManejador.nuevaEntidad()}" update=":formDetailRol" title="Crear"
-                                      oncomplete="PF('detailDialog').show()" icon="pi pi-plus-circle" />
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                            <p:growl id="messages" globalOnly="true" showDetail="true" />
+                            <p:messages id="messagesAll" closable="true" />
 
-        <!--Detalle de Rol-->
-        <h:form id="formDetailRol">
-            <p:dialog widgetVar="detailDialog" modal="true" header="Detalle de Rol" >
-                <p:panelGrid columns="4" >
-                    <h:outputText value="ID Rol" />
-                    <p:inputText value="#{rolManejador.entidadSeleccionada.rolIdPk}" />
-                    <h:outputText value="Nombre" />
-                    <p:inputText value="#{rolManejador.entidadSeleccionada.rolNombrerol}" />
-                    <h:outputText value="Descripcion" />
-                    <p:inputText value="#{rolManejador.entidadSeleccionada.rolDescripcion}" />
-                </p:panelGrid>
-                <p:panelGrid>
-                    <div class="ui-g">
-                        <div class="ui-md-12">
-                            <p:commandButton value="Guardar" actionListener="#{rolManejador.guardarEntidad()}" onsuccess="PF('detailDialog').hide()"  update=":messages :formRol :messagesAll"/>
-                            <p:commandButton value="Eliminar" actionListener="#{rolManejador.eliminarEntidad()}"  update=":messages :formRol :messagesAll" onsuccess="PF('detailDialog').hide()" />
-                            <p:commandButton value="Cancelar" onsuccess="PF('detailDialog').hide()" />
+                            <!--Formulario de rol-->
+                            <h:form id="formRol">
+                                <p:dataTable var="rol" value="#{rolManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
+                                    <p:column headerText="Id Rol" style="text-align: center" sortBy="#{rol.rolIdPk}" filterBy="#{rol.rolIdPk}" filterMatchMode="contains">
+                                        <h:outputText value="#{rol.rolIdPk}" />
+                                    </p:column>
+                                    <p:column headerText="Nomnre" sortBy="#{rol.rolNombrerol}" filterBy="#{rol.rolNombrerol}" filterMatchMode="contains">
+                                        <h:outputText value="#{rol.rolNombrerol}" />
+                                    </p:column>
+                                    <p:column headerText="Descripcion" sortBy="#{rol.rolDescripcion}" filterBy="#{rol.rolDescripcion}" filterMatchMode="contains">
+                                        <h:outputText value="#{rol.rolDescripcion}" />
+                                    </p:column>
+                                    <p:column headerText="OPCION" style="width:70px; text-align: center">
+                                        <p:commandButton update=":formDetailRol" oncomplete="PF('detailDialog').show()" icon="pi pi-search" title="Ver">
+                                            <f:setPropertyActionListener value="#{rol}" target="#{rolManejador.entidadSeleccionada}" />
+                                        </p:commandButton>
+                                        <p:commandButton  actionListener="#{rolManejador.nuevaEntidad()}" update=":formDetailRol" title="Crear"
+                                                          oncomplete="PF('detailDialog').show()" icon="pi pi-plus-circle" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+
+                            <!--Detalle de Rol-->
+                            <h:form id="formDetailRol" >
+                                    <p:dialog widgetVar="detailDialog" modal="true" header="Detalle de Rol" responsive="true">
+                                        <p:panelGrid columns="4" >
+                                            <h:outputText value="ID Rol" />
+                                            <p:inputText value="#{rolManejador.entidadSeleccionada.rolIdPk}" class="ui-md-12" disabled="true" />
+                                            <h:outputText value="Nombre" />
+                                            <p:inputText value="#{rolManejador.entidadSeleccionada.rolNombrerol}" />
+                                            <h:outputText value="Descripcion" />
+                                            <p:inputText value="#{rolManejador.entidadSeleccionada.rolDescripcion}" />
+                                        </p:panelGrid>
+                                        <p:panelGrid>
+                                            <div class="ui-g badge-light">
+                                                <div class="ui-md-12">
+                                                    <p:commandButton value="Guardar" actionListener="#{rolManejador.guardarEntidad()}" onsuccess="PF('detailDialog').hide()"  update=":messages :formRol :messagesAll"/>
+                                                    <p:commandButton value="Eliminar" actionListener="#{rolManejador.eliminarEntidad()}"  update=":messages :formRol :messagesAll" onsuccess="PF('detailDialog').hide()" />
+                                                    <p:commandButton value="Cancelar" onsuccess="PF('detailDialog').hide()" />
+                                                </div>
+                                            </div>
+                                        </p:panelGrid>
+                                    </p:dialog>
+                            </h:form>
+
+                            <!--implementando ajax-->
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargarndo..." />
+                            </p:dialog>
                         </div>
                     </div>
-                </p:panelGrid>
-            </p:dialog>
-        </h:form>
+                </div>
+            </ui:define>
 
-        <!--implementando ajax-->
-        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-            <h:outputLabel value="Cargarndo..." />
-        </p:dialog>
 
+        </ui:composition>
     </h:body>
 </html>
+
+
 

@@ -2,49 +2,71 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Gestionar Estado</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets<!--Estilos CSS-->
-        <style type="text/css">
-            .ui-g div {
-                text-align: right;
-            }
-        </style>
+        <ui:composition template="../plantillaPrincipal.xhtml">
 
-        <h1>Gestionar Estado del Empleado</h1>
+            <ui:define name="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header text-center badge-primary">
+                                <i class="fas fa-table mr-1"></i>
+                                Modulo de Administracion de Estado del Empleado
+                            </div>
 
-        <p:growl id="messages" globalOnly="true" showDetail="true" />
-        <p:messages id="messagesAll" />
+                            <!--Aplicando estilos CSS-->
+                            <style type="text/css">
+                                .ui-g div {
+                                    /*background-color: #ededed;*/
+                                    text-align: center;
+                                    border: 1px solid #fafafa;
+                                }
+                            </style>
 
-        <!--formulario usuario-->
-        <h:form id="formStatusEmpleado">
-            <p:dataTable var="emp" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
-                <p:column headerText="Id Empleado" style="text-align: center " sortBy="#{emp.empIdPk}" filterBy="#{emp.empIdPk}" filterMatchMode="contains" >
-                    <h:outputText value="#{emp.empIdPk}" />
-                </p:column>
-                <p:column headerText="Nombre" sortBy="#{emp.empNombres}" filterBy="#{emp.empNombres}" filterMatchMode="contains">
-                    <h:outputText value="#{emp.empNombres}" />
-                </p:column>
-                <p:column headerText="Apellidos" sortBy="#{emp.empApellidos}" filterBy="#{emp.empApellidos}" filterMatchMode="contains">
-                    <h:outputText value="#{emp.empApellidos}" />
-                </p:column>
-                <p:column headerText="Documento" style="text-align: center " sortBy="#{emp.empDocumento}" filterBy="#{emp.empDocumento}" filterMatchMode="contains">
-                    <h:outputText value="#{emp.empDocumento}" />
-                </p:column>
-                <p:column headerText="Correo Electronico" sortBy="#{emp.empCorreo}" filterBy="#{emp.empCorreo}" filterMatchMode="contains">
-                    <h:outputText value="#{emp.empCorreo}" />
-                </p:column>
-                <p:column headerText="Estado" sortBy="#{emp.empEstado}" style="width:6%;">
-                    <p:inputSwitch value="#{emp.empEstado}" onLabel="Activo" offLabel="Inactivo">
-                        <p:ajax listener="#{empleadoManejador.cambiarEstado(emp)}" process="@this" update=":messages :messagesAll :formStatusEmpleado" />
-                    </p:inputSwitch>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                            <p:growl id="messages" globalOnly="true" showDetail="true" />
+                            <p:messages id="messagesAll" closable="true" />
 
+                            <!--Formulario de Estados de Empleado-->
+                            <h:form id="formStatusEmpleado">
+                                <p:dataTable var="emp" value="#{empleadoManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
+                                    <p:column headerText="Id Empleado" style="text-align: center " sortBy="#{emp.empIdPk}" filterBy="#{emp.empIdPk}" filterMatchMode="contains" >
+                                        <h:outputText value="#{emp.empIdPk}" />
+                                    </p:column>
+                                    <p:column headerText="Nombre" sortBy="#{emp.empNombres}" filterBy="#{emp.empNombres}" filterMatchMode="contains">
+                                        <h:outputText value="#{emp.empNombres}" />
+                                    </p:column>
+                                    <p:column headerText="Apellidos" sortBy="#{emp.empApellidos}" filterBy="#{emp.empApellidos}" filterMatchMode="contains">
+                                        <h:outputText value="#{emp.empApellidos}" />
+                                    </p:column>
+                                    <p:column headerText="Documento" style="text-align: center " sortBy="#{emp.empDocumento}" filterBy="#{emp.empDocumento}" filterMatchMode="contains">
+                                        <h:outputText value="#{emp.empDocumento}" />
+                                    </p:column>
+                                    <p:column headerText="Correo Electronico" sortBy="#{emp.empCorreo}" filterBy="#{emp.empCorreo}" filterMatchMode="contains">
+                                        <h:outputText value="#{emp.empCorreo}" />
+                                    </p:column>
+                                    <p:column headerText="Estado" sortBy="#{emp.empEstado}" style="width:9%;">
+                                        <p:inputSwitch value="#{emp.empEstado}" onLabel="Activo" offLabel="Inactivo">
+                                            <p:ajax listener="#{empleadoManejador.obtenerEstado(emp)}" process="@this" update=":messages :messagesAll :formStatusEmpleado" />
+                                        </p:inputSwitch>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargarndo..." />
+                            </p:dialog>
+
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
     </h:body>
 </html>
-

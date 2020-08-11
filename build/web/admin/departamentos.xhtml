@@ -2,91 +2,107 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Catalo Departamento</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <ui:composition template="../plantillaPrincipal.xhtml">
 
-        <style type="text/css">
-            .ui-g div {
-                background-color: #ededed;
-                text-align: center;
-                border: 1px solid #fafafa;
-            }
-        </style>
+            <ui:define name="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header text-center badge-primary">
+                                <i class="fas fa-table mr-1"></i>
+                                Modulo de Administracion de Departamento
+                            </div>
 
-        <h1>Catalogo Departamento</h1>
+                            <!--Aplicando estilos CSS-->
+                            <style type="text/css">
+                                .ui-g div {
+                                    /*background-color: #ededed;*/
+                                    text-align: center;
+                                    border: 1px solid #fafafa;
+                                }
+                            </style>
 
-        <p:growl id="messages" globalOnly="true" showDetail="true" />
-        <p:messages id="messagesAll" />
+                            <p:growl id="messages" globalOnly="true" showDetail="true" />
+                            <p:messages id="messagesAll" closable="true" />
+                            
+                            <!--Formulario de departamento-->
+                            <h:form id="formDepto">
+                                <p:dataTable var="depto" value="#{deptoManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
+                                    <p:column headerText="Id Departamento" style="text-align: center" sortBy="#{depto.deptIdPk}" filterBy="#{depto.deptIdPk}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptIdPk}" />
+                                    </p:column>
+                                    <p:column headerText="Nomnre" sortBy="#{depto.deptNombre}" filterBy="#{depto.deptNombre}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptNombre}" />
+                                    </p:column>
+                                    <p:column headerText="Descripcion" sortBy="#{depto.deptDescripcion}" filterBy="#{depto.deptDescripcion}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptDescripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Presupuesto" sortBy="#{depto.deptPresupuesto}" filterBy="#{depto.deptPresupuesto}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptPresupuesto}" />
+                                    </p:column>
+                                    <p:column headerText="Vacantes Requiridas" style="text-align: center" sortBy="#{depto.deptVacantesRequeridas}" filterBy="#{depto.deptVacantesRequeridas}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptVacantesRequeridas}" />
+                                    </p:column>
+                                    <p:column headerText="Vacantes Disponibles" style="text-align: center" sortBy="#{depto.deptVacanteDisponible}" filterBy="#{depto.deptVacanteDisponible}" filterMatchMode="contains">
+                                        <h:outputText value="#{depto.deptVacanteDisponible}" />
+                                    </p:column>
+                                    <p:column headerText="OPCION" style="width:70px; text-align: center">
+                                        <p:commandButton update=":formDetailDepto" oncomplete="PF('detailDialog').show()" icon="pi pi-search" title="Ver">
+                                            <f:setPropertyActionListener value="#{depto}" target="#{deptoManejador.entidadSeleccionada}" />
+                                        </p:commandButton>
+                                        <p:commandButton  actionListener="#{deptoManejador.nuevaEntidad()}" update=":formDetailDepto" title="Crear"
+                                                          oncomplete="PF('detailDialog').show()" icon="pi pi-plus-circle" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
 
-        <h:form id="formDepto">
-            <p:dataTable var="depto" value="#{deptoManejador.entidadLista}" paginator="true" rows="5" reflow="true" >
-                <p:column headerText="Id Departamento" sortBy="#{depto.deptIdPk}" filterBy="#{depto.deptIdPk}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptIdPk}" />
-                </p:column>
-                <p:column headerText="Nomnre" sortBy="#{depto.deptNombre}" filterBy="#{depto.deptNombre}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptNombre}" />
-                </p:column>
-                <p:column headerText="Descripcion" sortBy="#{depto.deptDescripcion}" filterBy="#{depto.deptDescripcion}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptDescripcion}" />
-                </p:column>
-                <p:column headerText="Presupuesto" sortBy="#{depto.deptPresupuesto}" filterBy="#{depto.deptPresupuesto}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptPresupuesto}" />
-                </p:column>
-                <p:column headerText="Vacantes Requiridas" sortBy="#{depto.deptVacantesRequeridas}" filterBy="#{depto.deptVacantesRequeridas}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptVacantesRequeridas}" />
-                </p:column>
-                <p:column headerText="Vacantes Disponibles" sortBy="#{depto.deptVacanteDisponible}" filterBy="#{depto.deptVacanteDisponible}" filterMatchMode="contains">
-                    <h:outputText value="#{depto.deptVacanteDisponible}" />
-                </p:column>
-                <p:column headerText="OPCION" style="width:70px; align-content: center">
-                    <p:commandButton update=":formDetailDepto" oncomplete="PF('detailDialog').show()" icon="pi pi-search" title="Ver">
-                        <f:setPropertyActionListener value="#{depto}" target="#{deptoManejador.entidadSeleccionada}" />
-                    </p:commandButton>
-                    <p:commandButton  actionListener="#{deptoManejador.nuevaEntidad()}" update=":formDetailDepto" title="Crear"
-                                      oncomplete="PF('detailDialog').show()" icon="pi pi-plus-circle" />
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                            <h:form id="formDetailDepto">
+                                <p:dialog widgetVar="detailDialog" modal="true" header="Detalle del Departamento" >
+                                    <p:panelGrid columns="4" >
+                                        <h:outputText value="ID Departamento" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptIdPk}" disabled="true" />
+                                        <h:outputText value="Nombre" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptNombre}" />
+                                        <h:outputText value="Descripcion" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptDescripcion}" />
+                                        <h:outputText value="Presupuesto" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptPresupuesto}" />
+                                        <h:outputText value="Vacantes Requeridas" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptVacantesRequeridas}" />
+                                        <h:outputText value="Vacantes Dsiponibles" />
+                                        <p:inputText value="#{deptoManejador.entidadSeleccionada.deptVacanteDisponible}" />
+                                    </p:panelGrid>
 
-        <h:form id="formDetailDepto">
-            <p:dialog widgetVar="detailDialog" modal="true" header="Detalle del Departamento" >
-                <p:panelGrid columns="4" >
-                    <h:outputText value="ID Departamento" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptIdPk}" />
-                    <h:outputText value="Nombre" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptNombre}" />
-                    <h:outputText value="Descripcion" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptDescripcion}" />
-                    <h:outputText value="Presupuesto" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptPresupuesto}" />
-                    <h:outputText value="Vacantes Requeridas" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptVacantesRequeridas}" />
-                    <h:outputText value="Vacantes Dsiponibles" />
-                    <p:inputText value="#{deptoManejador.entidadSeleccionada.deptVacanteDisponible}" />
-                </p:panelGrid>
+                                    <p:panelGrid>
+                                        <div class="ui-g badge-light">
+                                            <div class="ui-md-12">
+                                                <p:commandButton value="Guardar" actionListener="#{deptoManejador.guardarEntidad()}" onsuccess="PF('detailDialog').hide()"  update=":messages :formDepto :messagesAll"/>
+                                                <p:commandButton value="Eliminar" actionListener="#{deptoManejador.eliminarEntidad()}"  update=":messages :formDepto :messagesAll" onsuccess="PF('detailDialog').hide()" />
+                                                <p:commandButton value="Cancelar" onsuccess="PF('detailDialog').hide()" />
+                                            </div>
+                                        </div>
 
-                <p:panelGrid>
-                    <div class="ui-g">
-                        <div class="ui-md-12">
-                            <p:commandButton value="Guardar" actionListener="#{deptoManejador.guardarEntidad()}" onsuccess="PF('detailDialog').hide()"  update=":messages :formDepto :messagesAll"/>
-                            <p:commandButton value="Eliminar" actionListener="#{deptoManejador.eliminarEntidad()}"  update=":messages :formDepto :messagesAll" onsuccess="PF('detailDialog').hide()" />
-                            <p:commandButton value="Cancelar" onsuccess="PF('detailDialog').hide()" />
+                                    </p:panelGrid>
+                                </p:dialog>
+                            </h:form>
+
+                            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <h:outputLabel value="Cargarndo..." />
+                            </p:dialog>
+
                         </div>
                     </div>
+                </div>
+            </ui:define>
 
-                </p:panelGrid>
-            </p:dialog>
-        </h:form>
-
-        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-            <h:outputLabel value="Cargarndo..." />
-        </p:dialog>
-        
+        </ui:composition>
     </h:body>
 </html>
-
