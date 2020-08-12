@@ -10,108 +10,108 @@
     </h:head>
     <h:body>
         <ui:composition template="../plantillaPrincipal.xhtml">
+            <ui:define name="content">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header text-center badge-primary">
+                            <i class="fas fa-table mr-1"></i>
+                            Modulo de genereacion de pagos
+                        </div>
 
-        <ui:define name="content">
+                        <!--Aplicando estilos CSS-->
+                        <style type="text/css">
+                            .ui-g div {
+                                /*background-color: #ededed;*/
+                                text-align: center;
+                                border: 1px solid #fafafa;
+                            }
+                        </style>
 
-        </ui:define>
-        <div class="col-md-12">
-            <div class="card mb-4">
-                <div class="card-header text-center badge-primary">
-                    <i class="fas fa-table mr-1"></i>
-                    Modulo de genereacion de pagos
-                </div>
+                        <p:growl id="messages" globalOnly="true" showDetail="true" />
+                        <p:messages id="messagesAll" closable="true" />
 
-                <!--Aplicando estilos CSS-->
-                <style type="text/css">
-                    .ui-g div {
-                        /*background-color: #ededed;*/
-                        text-align: center;
-                        border: 1px solid #fafafa;
-                    }
-                </style>
+                        <!--Formulario de generacion de pagos -->
+                        <h:form>
+                            <div style="text-align: right">
+                                <p:commandButton value="Exportar en PDF" ajax="false" >
+                                    <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
+                                    <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="planilla"
+                                                    preProcessor="#{reporte.preProcessPDF}"            />
+                                </p:commandButton>
 
-                <p:growl id="messages" globalOnly="true" showDetail="true" />
-                <p:messages id="messagesAll" closable="true" />
+                                <p:commandButton value="Exportar en Excel" ajax="false">
+                                    <p:dataExporter type="csv" target="tbl" fileName="cars" />
+                                </p:commandButton>    
+                            </div>
 
-                <!--Formulario de generacion de pagos -->
-                <h:form>
-                    <div style="float:right;padding-top: 5px;">
-                        <p:commandButton value="Exportar en PDF" ajax="false" >
-                            <!--<p:graphicImage name="../dist/assets/img/pdf.png" width="24"/>-->
-                            <p:dataExporter type="pdf" target="tbl"  pageOnly="true" fileName="planilla"
-                                            preProcessor="#{reporte.preProcessPDF}"            />
-                        </p:commandButton>
+                            <p:dataTable id="tbl" var="detalle" value="#{detallePlanillaManejador.entidadLista}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
 
-                        <p:commandButton value="Exportar en Excel" ajax="false">
-                            <p:dataExporter type="csv" target="tbl" fileName="cars" />
-                        </p:commandButton>    
+
+                                <p:column sortBy="#{detalle.contIdPk.empIdFk.empNombres}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre Empleado" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}"/>
+                                </p:column>
+                                <p:column sortBy="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Cargo" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}"/>
+                                </p:column>
+                                <p:column sortBy="#{detalle.contIdPk.contDiasLaborados}" style="width: 7%; text-align: center">
+                                    <f:facet name="header">
+                                        <h:outputText value="Dias Trab" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.contIdPk.contDiasLaborados}"/>
+                                </p:column>
+                                <p:column sortBy="#{detalle.contIdPk.contSalario}" style="text-align: center">
+                                    <f:facet name="header">
+                                        <h:outputText value="Sueldo Base" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.contIdPk.contSalario}"/>
+                                </p:column>
+                                <p:column style="width: 10%; text-align: center" sortBy="#{detalle.dplaIsss}" >
+                                    <f:facet name="header">
+                                        <h:outputText value="ISSS"/>
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.dplaIsss}" />
+                                </p:column>
+                                <p:column style="width: 10%; text-align: center" sortBy="#{detalle.dplaAfp}" >
+                                    <f:facet name="header">
+                                        <h:outputText value="AFP"/>
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.dplaAfp}" />
+                                </p:column>
+
+                                <p:column style="width: 10%; text-align: center" sortBy="#{detalle.dplaImpRenta}" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Renta" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.dplaImpRenta}" />
+                                </p:column>
+
+                                <p:column sortBy="#{detalle.dplaTotPagar}" style="text-align: center">
+                                    <f:facet name="header">
+                                        <h:outputText value="Total a Pagar" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalle.dplaTotPagar}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <h:outputLabel value="Cargarndo..." />
+                        </p:dialog>
+
                     </div>
+                </div>
+                
+            </ui:define>
 
-                    <p:dataTable id="tbl" var="detalle" value="#{detallePlanillaManejador.entidadLista}"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                 paginator="true" rows="10" style="margin-bottom:20px">
-
-
-                        <p:column sortBy="#{detalle.contIdPk.empIdFk.empNombres}">
-                            <f:facet name="header">
-                                <h:outputText value="Nombre Empleado" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.contIdPk.empIdFk.empNombres} #{detalle.contIdPk.empIdFk.empApellidos}"/>
-                        </p:column>
-                        <p:column sortBy="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}">
-                            <f:facet name="header">
-                                <h:outputText value="Cargo" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.contIdPk.empIdFk.rolIdFk.rolNombrerol}"/>
-                        </p:column>
-                        <p:column sortBy="#{detalle.contIdPk.contDiasLaborados}" style="width: 6%">
-                            <f:facet name="header">
-                                <h:outputText value="Dias Trab" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.contIdPk.contDiasLaborados}"/>
-                        </p:column>
-                        <p:column sortBy="#{detalle.contIdPk.contSalario}">
-                            <f:facet name="header">
-                                <h:outputText value="Sueldo Base" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.contIdPk.contSalario}"/>
-                        </p:column>
-                        <p:column style="width: 10%" sortBy="#{detalle.dplaIsss}">
-                            <f:facet name="header">
-                                <h:outputText value="ISSS"/>
-                            </f:facet>
-                            <h:outputText value="#{detalle.dplaIsss}" />
-                        </p:column>
-                        <p:column style="width: 10%" sortBy="#{detalle.dplaAfp}">
-                            <f:facet name="header">
-                                <h:outputText value="AFP"/>
-                            </f:facet>
-                            <h:outputText value="#{detalle.dplaAfp}" />
-                        </p:column>
-
-                        <p:column style="width: 10%" sortBy="#{detalle.dplaImpRenta}">
-                            <f:facet name="header">
-                                <h:outputText value="Renta" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.dplaImpRenta}" />
-                        </p:column>
-
-                        <p:column sortBy="#{detalle.dplaTotPagar}">
-                            <f:facet name="header">
-                                <h:outputText value="Total a Pagar" />
-                            </f:facet>
-                            <h:outputText value="#{detalle.dplaTotPagar}" />
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-
-                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                    <h:outputLabel value="Cargarndo..." />
-                </p:dialog>
-
-            </div>
-        </div>
         </ui:composition>
     </h:body>
 </html>

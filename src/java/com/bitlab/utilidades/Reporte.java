@@ -72,8 +72,8 @@ public class Reporte implements Serializable {
         p1.setSpacingBefore(100);
         pdf.add(p1);
         Paragraph abajo = new Paragraph("Persona encargada: Mario Lopez");
-        abajo.setAlignment(2);
-        abajo.setSpacingBefore(40);
+        abajo.setAlignment(1);
+        abajo.setSpacingBefore(20);
         abajo.setSpacingAfter(10f);
         pdf.add(abajo);
         //Configuracion de fecha de creacion de cada documento a la fecha actual
@@ -97,13 +97,13 @@ public class Reporte implements Serializable {
         }
         String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + hora + ":" + minutos + ":" + segundos;
         Paragraph fecha1 = new Paragraph();
-        fecha1.setAlignment(2);
+        fecha1.setAlignment(1);
         fecha1.add(fechaGenerada);
         fecha1.setSpacingAfter(20f);
         pdf.add(fecha1);
         Font colorBlanco = new Font();
         colorBlanco.setColor(Color.white);
-        Color colorAzul = WebColors.getRGBColor("#00DB53");
+        Color colorAzul = WebColors.getRGBColor("#116FBF");
         //Creacion de una tabla
         PdfPTable tabla2 = new PdfPTable(8);
         PdfPCell cell1 = new PdfPCell(new Phrase("", colorBlanco));
