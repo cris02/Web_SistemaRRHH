@@ -2,17 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <!--        <ui:composition template="/plantillaPrincipal.xhtml">
-                    <ui:define name="footer">-->
-
-        <div class="row">
+         <div class="row">
             <div class="col-md-12">
 
                 <div class="row">
@@ -47,9 +42,9 @@
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-danger text-white mb-4">
                             <div class="card-body">
-                                <p>Empleados Despedidos</p>
+                                <p>Usuarios Existentes</p>
                                 <h3 style="text-align: center">
-                                    <h:outputLabel value="#{empleadoManejador.numeroEmpleadosInactivos}" />
+                                    <h:outputLabel value="#{usuarioManejador.entidadLista.size()}" />
                                 </h3>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between" style="text-align: center">
@@ -73,42 +68,6 @@
                     </div>
 
                 </div>
-
-                <style type="text/css">
-                    body .ui-staticmessage.ui-message {
-                        width: 200%;
-                    }
-                </style>
-
-
-
-
-                <h:form>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    Comandos Disponibles
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <c:forEach var="menu" items="#{chatAyuda.listAyuda}">
-                                        <h:outputText value="#{menu}"/>
-                                        <br/>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-                            <br />
-                            <p:focus for="terminal" />
-                            <p:terminal id="terminal" widgetVar="term" prompt="Usuario Bitlab $" commandHandler="#{chatAyuda.handleCommand}"
-                                        welcomeMessage="Bienvenido al módulo de RRHH de Bitlab, Ingrese un comando Valido" />
-
-                            <p:commandButton type="button" value="Clear" icon="pi pi-trash" onclick="PF('term').clear()" style="margin-top:10px"/>
-                        </div>
-                    </div>
-
-
-                </h:form>
             </div>
         </div>
 
@@ -116,10 +75,6 @@
         <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
             <h:outputLabel value="Cargarndo..." />
         </p:dialog>
-
-        <!--            </ui:define>
-       
-                </ui:composition>-->
     </h:body>
 </html>
 
