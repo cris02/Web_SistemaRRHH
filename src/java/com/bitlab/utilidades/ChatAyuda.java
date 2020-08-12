@@ -1,6 +1,5 @@
 package com.bitlab.utilidades;
 
-import com.bitlab.controladores.UsuarioControlador;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +14,16 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class ChatAyuda implements Serializable {
 
-    private UsuarioControlador usControador;
     private List<String> listAyuda = new ArrayList<>();
 
     /**
      * Creates a new instance of ChatAyuda
      */
     public ChatAyuda() {
-        usControador = new UsuarioControlador();
         llenarMenu();
     }
 
+    //Metodo que llena la lista de opciones de ayuda
     public void llenarMenu() {
         listAyuda.add("Digita cualquier de los siguientes comandos para recibir asistencia:");
         listAyuda.add("*  Agregar -> Para saber como agregar un nuevo empleado");
@@ -35,6 +33,7 @@ public class ChatAyuda implements Serializable {
         listAyuda.add("*  Salarios -> Para saber como actualizar los salarios de los empleados");
     }
 
+    //Metodo que muestra en el chat las respuesta a los comandos
     public String handleCommand(String command, String[] params) {
 
         if (command.equalsIgnoreCase("Agregar")) {

@@ -25,9 +25,10 @@
 
         <c:set var="root" value="#{request.contextPath}" />
 
+
         <!--  inicio del Navbar-->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="../plantillaPrincipal.bitlab">RH-BITLAB</a>
+            <a class="navbar-brand" href="../index.bitlab">RH-BITLAB</a>
 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -45,7 +46,7 @@
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.bitlab">Cerrar Sesión</a>
+                        <a class="dropdown-item" href="../login.bitlab">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>
@@ -65,13 +66,14 @@
                             <c:if test="#{!inicioSesionManejador.esRh}">
                                 <ui:include src="admin.xhtml" /> 
                             </c:if>
+                            
                         </ui:insert>
                         <ui:insert name="menuRH" >
                             <c:if test="#{inicioSesionManejador.esRh}">
                                 <ui:include src="rrhh.xhtml" /> 
                             </c:if>
                         </ui:insert>
-
+                        
                     </div>
                     <!--Inicio de sidebar Menu-->
 
@@ -99,22 +101,23 @@
 
                         <div id="footer">
                             <ui:insert name="footer">
-
-                                <!--<ui:include src="panelRH.xhtml" />-->
-
+                                <c:if test="#{inicioSesionManejador.esRh}">
+                                    <ui:insert name="content">
+                                        <ui:include src="panelRH.xhtml" />
+                                    </ui:insert>
+                                </c:if>
                             </ui:insert>
                         </div>
 
 
                         <div id="content">
-                            <c:if test="#{inicioSesionManejador.esRh}">
-                                <ui:insert name="content">
-                                    <ui:include src="panelRH.xhtml" />
-                                </ui:insert>
-                            </c:if>
                             <ui:insert name="content">
+                                <c:if test="#{!inicioSesionManejador.esRh}">
+                                    <ui:insert name="content">
+                                        <ui:include src="panelAdmin.xhtml" />
+                                    </ui:insert>
+                                </c:if>
                             </ui:insert>
-
                         </div>
                     </div>
                 </main>
