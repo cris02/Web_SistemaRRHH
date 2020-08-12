@@ -22,10 +22,10 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class InicioSesionManejador implements Serializable {
     private Usuario usuario;
-    private UsuarioControlador usuarioControlador; //Mejor dejar la clase como UsuarioControlador
+    private UsuarioControlador usuarioControlador; 
     private Usuario us;
-//    private Date fechaConexion;
     private String fechaConexionUltima;
+    private boolean esRh; //bandera para saber si es usuario tipo rrhh o admin
     /**
      * Creates a new instance of InicioSesionManejador
      */
@@ -40,11 +40,9 @@ public class InicioSesionManejador implements Serializable {
             if (us != null) {
                 if (usuario.getUsuNombre().equals(us.getUsuNombre()) && usuario.getUsuContrasena().equals(us.getUsuContrasena())) {
                     System.out.println("Bienvenido " + us.getUsuNombre() + " usted es un usuario de tipo " + us.getRolIdFk().getRolNombrerol());
-                    if (us.getRolIdFk().getRolNombrerol().equals("RRHH")) {
-                        Utilidades.redireccionar("rrhh2");
-                    } else if (us.getRolIdFk().getRolNombrerol().equals("ADMINISTRADOR SISTEMA")) {
-                        Utilidades.redireccionar("admin");
-                    }
+                esRRHH();
+                Utilidades.redireccionar("plantillaPrincipal");
+                    
                     fechaConexionUltima = us.getUsuFechaConexion().toString();
                     System.out.println("Fecha de sesion anterior " + fechaConexionUltima);
                     us.setUsuFechaConexion(new Date());
@@ -52,7 +50,7 @@ public class InicioSesionManejador implements Serializable {
                 }
             } else {
                 Utilidades.lanzarMensaje(FacesMessage.SEVERITY_ERROR, "Usuario invalido", "Usuario o contrasena son invalidos");
-                Utilidades.redireccionar("index");
+                Utilidades.redireccionar("login");
             }
         } catch (Exception ex) {
             Logger.getLogger(InicioSesionManejador.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +60,7 @@ public class InicioSesionManejador implements Serializable {
         try {
             Usuario usValidado = usuarioControlador.encontrarPorUsuario(us.getUsuNombre(), us.getUsuContrasena());
             if(usValidado == null){
-                Utilidades.redireccionar("index");
+                Utilidades.redireccionar("login");
             }
         } catch (Exception ex) {
             Logger.getLogger(InicioSesionManejador.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +77,14 @@ public class InicioSesionManejador implements Serializable {
         us = null;
         validarSesion();
     }
+    
+    public void esRRHH(){
+        if(us.getRolIdFk().getRolNombrerol().equals("RRHH")){
+            esRh = true;
+        }
+        else esRh = false;
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -103,4 +109,13 @@ public class InicioSesionManejador implements Serializable {
     public void setFechaConexionUltima(String fechaConexionUltima) {
         this.fechaConexionUltima = fechaConexionUltima;
     }
+
+    public boolean isEsRh() {
+        return esRh;
+    }
+
+    public void setEsRh(boolean esRh) {
+        this.esRh = esRh;
+    }
+    
 }
