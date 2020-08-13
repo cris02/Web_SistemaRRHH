@@ -46,7 +46,7 @@
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../login.bitlab">Cerrar Sesión</a>
+                        <a class="dropdown-item" href="#{request.contextPath}/login.bitlab">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>
@@ -102,7 +102,7 @@
                         <div id="footer">
                             <ui:insert name="footer">
                                 <c:if test="#{inicioSesionManejador.esRh}">
-                                    <ui:insert name="content">
+                                    <ui:insert name="footer">
                                         <ui:include src="panelRH.xhtml" />
                                     </ui:insert>
                                 </c:if>

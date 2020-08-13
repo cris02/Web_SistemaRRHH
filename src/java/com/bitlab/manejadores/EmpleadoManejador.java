@@ -42,8 +42,8 @@ public class EmpleadoManejador extends ManejadorAbstracto<Empleado> {
         empleadoControlado = new EmpleadoControlador();
         rolControlador = new RolControlador();
         deptControlador = new DepartamentoControlador();
-        rolLista = rolControlador.encontrarEntidades();
-        departamentoLista = deptControlador.encontrarEntidades();
+        rolLista =rolControlador.encontrarEntidades();
+        departamentoLista =  deptControlador.encontrarEntidades();
         listaEmpleados = empleadoControlado.encontrarEmpleadoEstado(true);
         numeroEmpleados = String.valueOf(listaEmpleados.size());
         numeroEmpleadosInactivos = String.valueOf(empleadoControlado.encontrarEmpleadoEstado(false).size());

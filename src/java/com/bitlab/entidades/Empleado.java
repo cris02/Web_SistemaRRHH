@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -98,7 +99,7 @@ public class Empleado implements Serializable {
     @Column(name = "EMP_ESTADO", nullable = false)
     private boolean empEstado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empIdFk", fetch = FetchType.EAGER)
-    private List<Contrato> contratoList;
+    private Set<Contrato> contratoList;
     @JoinColumn(name = "ROL_ID_FK", referencedColumnName = "ROL_ID_PK", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Rol rolIdFk;
@@ -224,11 +225,11 @@ public class Empleado implements Serializable {
         this.empEstado = empEstado;
     }
 
-    public List<Contrato> getContratoList() {
+    public Set<Contrato> getContratoList() {
         return contratoList;
     }
 
-    public void setContratoList(List<Contrato> contratoList) {
+    public void setContratoList(Set<Contrato> contratoList) {
         this.contratoList = contratoList;
     }
 
