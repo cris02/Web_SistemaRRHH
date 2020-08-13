@@ -1,0 +1,6 @@
+projectKey=pryecto-rh
+serverUrl=http://35.239.6.108:9000
+serverVersion=8.4.1.35646
+dashboardUrl=http://35.239.6.108:9000/dashboard?id=pryecto-rh
+ceTaskId=AXPkt41uJxffld2sd4pn
+ceTaskUrl=http://35.239.6.108:9000/api/ce/task?id=AXPkt41uJxffld2sd4pn

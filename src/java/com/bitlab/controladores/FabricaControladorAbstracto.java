@@ -5,7 +5,6 @@
  */
 package com.bitlab.controladores;
 
-import com.bitlab.entidades.Empleado;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

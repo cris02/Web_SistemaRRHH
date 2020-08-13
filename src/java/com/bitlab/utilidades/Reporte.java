@@ -86,13 +86,13 @@ public class Reporte implements Serializable {
         String segundos = Integer.toString(greg.get(Calendar.SECOND));
         if(Integer.valueOf(dia) >=1 && Integer.valueOf(dia)<=9){
             dia = "0" +dia;
-        }if(Integer.valueOf(mes) >=1 && Integer.valueOf(mes)<=9){
+        }else if(Integer.valueOf(mes) >=1 && Integer.valueOf(mes)<=9){
             mes = "0" +mes;
-        }if(Integer.valueOf(hora) >=0 && Integer.valueOf(hora)<=9){
+        }else if(Integer.valueOf(hora) >=0 && Integer.valueOf(hora)<=9){
             hora = "0"+ hora;
-        }if(Integer.valueOf(minutos) >=0 && Integer.valueOf(minutos)<=9){
+        }else if(Integer.valueOf(minutos) >=0 && Integer.valueOf(minutos)<=9){
             minutos = "0" +minutos;
-        }if(Integer.valueOf(segundos) >=0 && Integer.valueOf(segundos)<=9){
+        }else if(Integer.valueOf(segundos) >=0 && Integer.valueOf(segundos)<=9){
             segundos = "0" +segundos;
         }
         String fechaGenerada = "Reporte generado: " + dia + "/" + mes + "/" + ano + " - " + hora + ":" + minutos + ":" + segundos;
