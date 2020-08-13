@@ -7,6 +7,7 @@ package com.bitlab.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,9 +54,9 @@ public class Rol implements Serializable {
     @Column(name = "ROL_ESTATUS", nullable = false)
     private boolean rolEstatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdFk", fetch = FetchType.EAGER)
-    private List<Usuario> usuarioList;
+    private Set<Usuario> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdFk", fetch = FetchType.EAGER)
-    private List<Empleado> empleadoList;
+    private Set<Empleado> empleadoList;
 
     public Rol() {
     }
@@ -101,19 +102,19 @@ public class Rol implements Serializable {
         this.rolEstatus = rolEstatus;
     }
 
-    public List<Usuario> getUsuarioList() {
+    public Set<Usuario> getUsuarioList() {
         return usuarioList;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
+    public void setUsuarioList(Set<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
     }
 
-    public List<Empleado> getEmpleadoList() {
+    public Set<Empleado> getEmpleadoList() {
         return empleadoList;
     }
 
-    public void setEmpleadoList(List<Empleado> empleadoList) {
+    public void setEmpleadoList(Set<Empleado> empleadoList) {
         this.empleadoList = empleadoList;
     }
 
