@@ -82,7 +82,6 @@ public abstract class ManejadorAbstracto<T>{
         metodos Getter y Setter
     */
     public T getEntidadSeleccionada() {
-        log.info("Entidad seleccionada para operar - " + entidadSeleccionada);
         return entidadSeleccionada;
     }
 

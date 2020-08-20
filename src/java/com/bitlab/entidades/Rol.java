@@ -54,9 +54,9 @@ public class Rol implements Serializable {
     @Column(name = "ROL_ESTATUS", nullable = false)
     private boolean rolEstatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdFk", fetch = FetchType.EAGER)
-    private Set<Usuario> usuarioList;
+    private List<Usuario> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdFk", fetch = FetchType.EAGER)
-    private Set<Empleado> empleadoList;
+    private List<Empleado> empleadoList;
 
     public Rol() {
     }
@@ -102,19 +102,19 @@ public class Rol implements Serializable {
         this.rolEstatus = rolEstatus;
     }
 
-    public Set<Usuario> getUsuarioList() {
+    public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
 
-    public void setUsuarioList(Set<Usuario> usuarioList) {
+    public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
     }
 
-    public Set<Empleado> getEmpleadoList() {
+    public List<Empleado> getEmpleadoList() {
         return empleadoList;
     }
 
-    public void setEmpleadoList(Set<Empleado> empleadoList) {
+    public void setEmpleadoList(List<Empleado> empleadoList) {
         this.empleadoList = empleadoList;
     }
 

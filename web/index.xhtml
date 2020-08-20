@@ -28,7 +28,7 @@
 
         <!--  inicio del Navbar-->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="../index.bitlab">RH-BITLAB</a>
+            <a class="navbar-brand" href="#{request.contextPath}/index.bitlab">RH-BITLAB</a>
 
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -93,21 +93,11 @@
                                                     <h3 class="mt-4">Sistema Abministracion de Recursos Humanos</h3>                           
                                                 </div>-->
                         <ol class="breadcrumb mb-4 mt-4">
-                            <li class="breadcrumb-item"><a href="index.bitlab">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#{request.contextPath}/index.bitlab">Home</a></li>
                             <li class="breadcrumb-item active">Sistema Administracion de Recursos Humanos</li>
                         </ol>
 
                         <!--Contenido de los catalogos-->
-
-                        <div id="footer">
-                            <ui:insert name="footer">
-                                <c:if test="#{inicioSesionManejador.esRh}">
-                                    <ui:insert name="footer">
-                                        <ui:include src="panelRH.xhtml" />
-                                    </ui:insert>
-                                </c:if>
-                            </ui:insert>
-                        </div>
 
 
                         <div id="content">
@@ -115,6 +105,11 @@
                                 <c:if test="#{!inicioSesionManejador.esRh}">
                                     <ui:insert name="content">
                                         <ui:include src="panelAdmin.xhtml" />
+                                    </ui:insert>
+                                </c:if>
+                                 <c:if test="#{inicioSesionManejador.esRh}">
+                                    <ui:insert name="content">
+                                        <ui:include src="panelRH.xhtml" />
                                     </ui:insert>
                                 </c:if>
                             </ui:insert>
